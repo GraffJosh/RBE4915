@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/joshgraff/RBE4915/tk
+CMAKE_SOURCE_DIR = /home/ubuntu/RBE4915/tk
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/joshgraff/RBE4915/tk
+CMAKE_BINARY_DIR = /home/ubuntu/RBE4915/tk
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -69,14 +69,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/joshgraff/RBE4915/tk && $(CMAKE_COMMAND) -E cmake_progress_start /home/joshgraff/RBE4915/tk/CMakeFiles /home/joshgraff/RBE4915/tk/arms/apriltags-cpp/src/CMakeFiles/progress.marks
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/joshgraff/RBE4915/tk/CMakeFiles 0
+	cd /home/ubuntu/RBE4915/tk && $(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/RBE4915/tk/CMakeFiles /home/ubuntu/RBE4915/tk/arms/apriltags-cpp/src/CMakeFiles/progress.marks
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/RBE4915/tk/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/clean
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/clean
 .PHONY : clean
 
 # The main clean target
@@ -85,22 +85,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/preinstall
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/preinstall
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/joshgraff/RBE4915/tk && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/ubuntu/RBE4915/tk && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/rule:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/rule
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/rule
 .PHONY : arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/rule
 
 # Convenience name for target.
@@ -109,12 +109,12 @@ apriltags: arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/rule
 
 # fast build rule for target.
 apriltags/fast:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build
 .PHONY : apriltags/fast
 
 # Convenience name for target.
 arms/apriltags-cpp/src/CMakeFiles/camtest.dir/rule:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/CMakeFiles/camtest.dir/rule
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/CMakeFiles/camtest.dir/rule
 .PHONY : arms/apriltags-cpp/src/CMakeFiles/camtest.dir/rule
 
 # Convenience name for target.
@@ -123,12 +123,12 @@ camtest: arms/apriltags-cpp/src/CMakeFiles/camtest.dir/rule
 
 # fast build rule for target.
 camtest/fast:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/camtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/camtest.dir/build
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/camtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/camtest.dir/build
 .PHONY : camtest/fast
 
 # Convenience name for target.
 arms/apriltags-cpp/src/CMakeFiles/gltest.dir/rule:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/CMakeFiles/gltest.dir/rule
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/CMakeFiles/gltest.dir/rule
 .PHONY : arms/apriltags-cpp/src/CMakeFiles/gltest.dir/rule
 
 # Convenience name for target.
@@ -137,26 +137,12 @@ gltest: arms/apriltags-cpp/src/CMakeFiles/gltest.dir/rule
 
 # fast build rule for target.
 gltest/fast:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/gltest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/gltest.dir/build
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/gltest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/gltest.dir/build
 .PHONY : gltest/fast
 
 # Convenience name for target.
-arms/apriltags-cpp/src/CMakeFiles/maketags.dir/rule:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/CMakeFiles/maketags.dir/rule
-.PHONY : arms/apriltags-cpp/src/CMakeFiles/maketags.dir/rule
-
-# Convenience name for target.
-maketags: arms/apriltags-cpp/src/CMakeFiles/maketags.dir/rule
-.PHONY : maketags
-
-# fast build rule for target.
-maketags/fast:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/maketags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/maketags.dir/build
-.PHONY : maketags/fast
-
-# Convenience name for target.
 arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/rule:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/rule
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/rule
 .PHONY : arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/rule
 
 # Convenience name for target.
@@ -165,12 +151,12 @@ quadtest: arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/rule
 
 # fast build rule for target.
 quadtest/fast:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/build
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/build
 .PHONY : quadtest/fast
 
 # Convenience name for target.
 arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/rule:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/rule
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/rule
 .PHONY : arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/rule
 
 # Convenience name for target.
@@ -179,7 +165,7 @@ tagtest: arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/rule
 
 # fast build rule for target.
 tagtest/fast:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/build
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/build
 .PHONY : tagtest/fast
 
 CameraUtil.o: CameraUtil.cpp.o
@@ -187,7 +173,7 @@ CameraUtil.o: CameraUtil.cpp.o
 
 # target to build an object file
 CameraUtil.cpp.o:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/CameraUtil.cpp.o
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/CameraUtil.cpp.o
 .PHONY : CameraUtil.cpp.o
 
 CameraUtil.i: CameraUtil.cpp.i
@@ -195,7 +181,7 @@ CameraUtil.i: CameraUtil.cpp.i
 
 # target to preprocess a source file
 CameraUtil.cpp.i:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/CameraUtil.cpp.i
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/CameraUtil.cpp.i
 .PHONY : CameraUtil.cpp.i
 
 CameraUtil.s: CameraUtil.cpp.s
@@ -203,7 +189,7 @@ CameraUtil.s: CameraUtil.cpp.s
 
 # target to generate assembly for a file
 CameraUtil.cpp.s:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/CameraUtil.cpp.s
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/CameraUtil.cpp.s
 .PHONY : CameraUtil.cpp.s
 
 DebugImage.o: DebugImage.cpp.o
@@ -211,7 +197,7 @@ DebugImage.o: DebugImage.cpp.o
 
 # target to build an object file
 DebugImage.cpp.o:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/DebugImage.cpp.o
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/DebugImage.cpp.o
 .PHONY : DebugImage.cpp.o
 
 DebugImage.i: DebugImage.cpp.i
@@ -219,7 +205,7 @@ DebugImage.i: DebugImage.cpp.i
 
 # target to preprocess a source file
 DebugImage.cpp.i:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/DebugImage.cpp.i
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/DebugImage.cpp.i
 .PHONY : DebugImage.cpp.i
 
 DebugImage.s: DebugImage.cpp.s
@@ -227,7 +213,7 @@ DebugImage.s: DebugImage.cpp.s
 
 # target to generate assembly for a file
 DebugImage.cpp.s:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/DebugImage.cpp.s
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/DebugImage.cpp.s
 .PHONY : DebugImage.cpp.s
 
 Geometry.o: Geometry.cpp.o
@@ -235,7 +221,7 @@ Geometry.o: Geometry.cpp.o
 
 # target to build an object file
 Geometry.cpp.o:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/Geometry.cpp.o
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/Geometry.cpp.o
 .PHONY : Geometry.cpp.o
 
 Geometry.i: Geometry.cpp.i
@@ -243,7 +229,7 @@ Geometry.i: Geometry.cpp.i
 
 # target to preprocess a source file
 Geometry.cpp.i:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/Geometry.cpp.i
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/Geometry.cpp.i
 .PHONY : Geometry.cpp.i
 
 Geometry.s: Geometry.cpp.s
@@ -251,7 +237,7 @@ Geometry.s: Geometry.cpp.s
 
 # target to generate assembly for a file
 Geometry.cpp.s:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/Geometry.cpp.s
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/Geometry.cpp.s
 .PHONY : Geometry.cpp.s
 
 GrayModel.o: GrayModel.cpp.o
@@ -259,7 +245,7 @@ GrayModel.o: GrayModel.cpp.o
 
 # target to build an object file
 GrayModel.cpp.o:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/GrayModel.cpp.o
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/GrayModel.cpp.o
 .PHONY : GrayModel.cpp.o
 
 GrayModel.i: GrayModel.cpp.i
@@ -267,7 +253,7 @@ GrayModel.i: GrayModel.cpp.i
 
 # target to preprocess a source file
 GrayModel.cpp.i:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/GrayModel.cpp.i
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/GrayModel.cpp.i
 .PHONY : GrayModel.cpp.i
 
 GrayModel.s: GrayModel.cpp.s
@@ -275,7 +261,7 @@ GrayModel.s: GrayModel.cpp.s
 
 # target to generate assembly for a file
 GrayModel.cpp.s:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/GrayModel.cpp.s
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/GrayModel.cpp.s
 .PHONY : GrayModel.cpp.s
 
 MathUtil.o: MathUtil.cpp.o
@@ -283,7 +269,7 @@ MathUtil.o: MathUtil.cpp.o
 
 # target to build an object file
 MathUtil.cpp.o:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/MathUtil.cpp.o
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/MathUtil.cpp.o
 .PHONY : MathUtil.cpp.o
 
 MathUtil.i: MathUtil.cpp.i
@@ -291,7 +277,7 @@ MathUtil.i: MathUtil.cpp.i
 
 # target to preprocess a source file
 MathUtil.cpp.i:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/MathUtil.cpp.i
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/MathUtil.cpp.i
 .PHONY : MathUtil.cpp.i
 
 MathUtil.s: MathUtil.cpp.s
@@ -299,7 +285,7 @@ MathUtil.s: MathUtil.cpp.s
 
 # target to generate assembly for a file
 MathUtil.cpp.s:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/MathUtil.cpp.s
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/MathUtil.cpp.s
 .PHONY : MathUtil.cpp.s
 
 Refine.o: Refine.cpp.o
@@ -307,7 +293,7 @@ Refine.o: Refine.cpp.o
 
 # target to build an object file
 Refine.cpp.o:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/Refine.cpp.o
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/Refine.cpp.o
 .PHONY : Refine.cpp.o
 
 Refine.i: Refine.cpp.i
@@ -315,7 +301,7 @@ Refine.i: Refine.cpp.i
 
 # target to preprocess a source file
 Refine.cpp.i:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/Refine.cpp.i
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/Refine.cpp.i
 .PHONY : Refine.cpp.i
 
 Refine.s: Refine.cpp.s
@@ -323,7 +309,7 @@ Refine.s: Refine.cpp.s
 
 # target to generate assembly for a file
 Refine.cpp.s:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/Refine.cpp.s
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/Refine.cpp.s
 .PHONY : Refine.cpp.s
 
 TagDetector.o: TagDetector.cpp.o
@@ -331,7 +317,7 @@ TagDetector.o: TagDetector.cpp.o
 
 # target to build an object file
 TagDetector.cpp.o:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/TagDetector.cpp.o
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/TagDetector.cpp.o
 .PHONY : TagDetector.cpp.o
 
 TagDetector.i: TagDetector.cpp.i
@@ -339,7 +325,7 @@ TagDetector.i: TagDetector.cpp.i
 
 # target to preprocess a source file
 TagDetector.cpp.i:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/TagDetector.cpp.i
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/TagDetector.cpp.i
 .PHONY : TagDetector.cpp.i
 
 TagDetector.s: TagDetector.cpp.s
@@ -347,7 +333,7 @@ TagDetector.s: TagDetector.cpp.s
 
 # target to generate assembly for a file
 TagDetector.cpp.s:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/TagDetector.cpp.s
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/TagDetector.cpp.s
 .PHONY : TagDetector.cpp.s
 
 TagFamilies.o: TagFamilies.cpp.o
@@ -355,7 +341,7 @@ TagFamilies.o: TagFamilies.cpp.o
 
 # target to build an object file
 TagFamilies.cpp.o:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/TagFamilies.cpp.o
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/TagFamilies.cpp.o
 .PHONY : TagFamilies.cpp.o
 
 TagFamilies.i: TagFamilies.cpp.i
@@ -363,7 +349,7 @@ TagFamilies.i: TagFamilies.cpp.i
 
 # target to preprocess a source file
 TagFamilies.cpp.i:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/TagFamilies.cpp.i
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/TagFamilies.cpp.i
 .PHONY : TagFamilies.cpp.i
 
 TagFamilies.s: TagFamilies.cpp.s
@@ -371,7 +357,7 @@ TagFamilies.s: TagFamilies.cpp.s
 
 # target to generate assembly for a file
 TagFamilies.cpp.s:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/TagFamilies.cpp.s
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/TagFamilies.cpp.s
 .PHONY : TagFamilies.cpp.s
 
 TagFamily.o: TagFamily.cpp.o
@@ -379,7 +365,7 @@ TagFamily.o: TagFamily.cpp.o
 
 # target to build an object file
 TagFamily.cpp.o:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/TagFamily.cpp.o
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/TagFamily.cpp.o
 .PHONY : TagFamily.cpp.o
 
 TagFamily.i: TagFamily.cpp.i
@@ -387,7 +373,7 @@ TagFamily.i: TagFamily.cpp.i
 
 # target to preprocess a source file
 TagFamily.cpp.i:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/TagFamily.cpp.i
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/TagFamily.cpp.i
 .PHONY : TagFamily.cpp.i
 
 TagFamily.s: TagFamily.cpp.s
@@ -395,7 +381,7 @@ TagFamily.s: TagFamily.cpp.s
 
 # target to generate assembly for a file
 TagFamily.cpp.s:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/TagFamily.cpp.s
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/TagFamily.cpp.s
 .PHONY : TagFamily.cpp.s
 
 UnionFindSimple.o: UnionFindSimple.cpp.o
@@ -403,7 +389,7 @@ UnionFindSimple.o: UnionFindSimple.cpp.o
 
 # target to build an object file
 UnionFindSimple.cpp.o:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/UnionFindSimple.cpp.o
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/UnionFindSimple.cpp.o
 .PHONY : UnionFindSimple.cpp.o
 
 UnionFindSimple.i: UnionFindSimple.cpp.i
@@ -411,7 +397,7 @@ UnionFindSimple.i: UnionFindSimple.cpp.i
 
 # target to preprocess a source file
 UnionFindSimple.cpp.i:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/UnionFindSimple.cpp.i
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/UnionFindSimple.cpp.i
 .PHONY : UnionFindSimple.cpp.i
 
 UnionFindSimple.s: UnionFindSimple.cpp.s
@@ -419,7 +405,7 @@ UnionFindSimple.s: UnionFindSimple.cpp.s
 
 # target to generate assembly for a file
 UnionFindSimple.cpp.s:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/UnionFindSimple.cpp.s
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/apriltags.dir/UnionFindSimple.cpp.s
 .PHONY : UnionFindSimple.cpp.s
 
 camtest.o: camtest.cpp.o
@@ -427,7 +413,7 @@ camtest.o: camtest.cpp.o
 
 # target to build an object file
 camtest.cpp.o:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/camtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/camtest.dir/camtest.cpp.o
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/camtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/camtest.dir/camtest.cpp.o
 .PHONY : camtest.cpp.o
 
 camtest.i: camtest.cpp.i
@@ -435,7 +421,7 @@ camtest.i: camtest.cpp.i
 
 # target to preprocess a source file
 camtest.cpp.i:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/camtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/camtest.dir/camtest.cpp.i
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/camtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/camtest.dir/camtest.cpp.i
 .PHONY : camtest.cpp.i
 
 camtest.s: camtest.cpp.s
@@ -443,7 +429,7 @@ camtest.s: camtest.cpp.s
 
 # target to generate assembly for a file
 camtest.cpp.s:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/camtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/camtest.dir/camtest.cpp.s
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/camtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/camtest.dir/camtest.cpp.s
 .PHONY : camtest.cpp.s
 
 gltest.o: gltest.cpp.o
@@ -451,7 +437,7 @@ gltest.o: gltest.cpp.o
 
 # target to build an object file
 gltest.cpp.o:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/gltest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/gltest.dir/gltest.cpp.o
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/gltest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/gltest.dir/gltest.cpp.o
 .PHONY : gltest.cpp.o
 
 gltest.i: gltest.cpp.i
@@ -459,7 +445,7 @@ gltest.i: gltest.cpp.i
 
 # target to preprocess a source file
 gltest.cpp.i:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/gltest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/gltest.dir/gltest.cpp.i
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/gltest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/gltest.dir/gltest.cpp.i
 .PHONY : gltest.cpp.i
 
 gltest.s: gltest.cpp.s
@@ -467,39 +453,15 @@ gltest.s: gltest.cpp.s
 
 # target to generate assembly for a file
 gltest.cpp.s:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/gltest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/gltest.dir/gltest.cpp.s
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/gltest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/gltest.dir/gltest.cpp.s
 .PHONY : gltest.cpp.s
-
-maketags.o: maketags.cpp.o
-.PHONY : maketags.o
-
-# target to build an object file
-maketags.cpp.o:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/maketags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/maketags.dir/maketags.cpp.o
-.PHONY : maketags.cpp.o
-
-maketags.i: maketags.cpp.i
-.PHONY : maketags.i
-
-# target to preprocess a source file
-maketags.cpp.i:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/maketags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/maketags.dir/maketags.cpp.i
-.PHONY : maketags.cpp.i
-
-maketags.s: maketags.cpp.s
-.PHONY : maketags.s
-
-# target to generate assembly for a file
-maketags.cpp.s:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/maketags.dir/build.make arms/apriltags-cpp/src/CMakeFiles/maketags.dir/maketags.cpp.s
-.PHONY : maketags.cpp.s
 
 quadtest.o: quadtest.cpp.o
 .PHONY : quadtest.o
 
 # target to build an object file
 quadtest.cpp.o:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/quadtest.cpp.o
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/quadtest.cpp.o
 .PHONY : quadtest.cpp.o
 
 quadtest.i: quadtest.cpp.i
@@ -507,7 +469,7 @@ quadtest.i: quadtest.cpp.i
 
 # target to preprocess a source file
 quadtest.cpp.i:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/quadtest.cpp.i
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/quadtest.cpp.i
 .PHONY : quadtest.cpp.i
 
 quadtest.s: quadtest.cpp.s
@@ -515,7 +477,7 @@ quadtest.s: quadtest.cpp.s
 
 # target to generate assembly for a file
 quadtest.cpp.s:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/quadtest.cpp.s
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/quadtest.dir/quadtest.cpp.s
 .PHONY : quadtest.cpp.s
 
 tagtest.o: tagtest.cpp.o
@@ -523,7 +485,7 @@ tagtest.o: tagtest.cpp.o
 
 # target to build an object file
 tagtest.cpp.o:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/tagtest.cpp.o
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/tagtest.cpp.o
 .PHONY : tagtest.cpp.o
 
 tagtest.i: tagtest.cpp.i
@@ -531,7 +493,7 @@ tagtest.i: tagtest.cpp.i
 
 # target to preprocess a source file
 tagtest.cpp.i:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/tagtest.cpp.i
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/tagtest.cpp.i
 .PHONY : tagtest.cpp.i
 
 tagtest.s: tagtest.cpp.s
@@ -539,7 +501,7 @@ tagtest.s: tagtest.cpp.s
 
 # target to generate assembly for a file
 tagtest.cpp.s:
-	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/tagtest.cpp.s
+	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/build.make arms/apriltags-cpp/src/CMakeFiles/tagtest.dir/tagtest.cpp.s
 .PHONY : tagtest.cpp.s
 
 # Help Target
@@ -552,7 +514,6 @@ help:
 	@echo "... camtest"
 	@echo "... edit_cache"
 	@echo "... gltest"
-	@echo "... maketags"
 	@echo "... quadtest"
 	@echo "... rebuild_cache"
 	@echo "... tagtest"
@@ -592,9 +553,6 @@ help:
 	@echo "... gltest.o"
 	@echo "... gltest.i"
 	@echo "... gltest.s"
-	@echo "... maketags.o"
-	@echo "... maketags.i"
-	@echo "... maketags.s"
 	@echo "... quadtest.o"
 	@echo "... quadtest.i"
 	@echo "... quadtest.s"
@@ -612,6 +570,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/joshgraff/RBE4915/tk && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/ubuntu/RBE4915/tk && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -38,9 +38,8 @@ def go_to_point(speed,x,y,z):
 
 tcp = client.connection('192.168.10.64')
 
-# trajectory = create_circle(1,50,30,400,-400)
-trajectory = [pckt.packet(4,1, 100,0,pckt.point(400,400,375,0,180,0))]
-trajectory.append(pckt.packet(4,1, 100,0,pckt.point(400,-400,375,0,180,0)))
+# trajectory = create_circle(1,50)
+trajectory = go_to_point(100,600,-300,300)
 i=0
 for pckt in trajectory:
     print pckt
