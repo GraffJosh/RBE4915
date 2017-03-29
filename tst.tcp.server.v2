@@ -1,0 +1,78 @@
+.PROGRAM tst.tcp.srvr()
+;-------------------------------------------------------------------------
+; ABSTRACT: Example TCP/IP server program.  The server program reads any
+;        incoming strings, displays them on the monitor, and echoes them
+;        back to the client node.
+;
+;        The program may be terminated by aborting.
+;
+; INPUT PARMS:  None
+; OUTPUT PARMS: None
+;-------------------------------------------------------------------------
+
+        AUTO do_wait, handle, lun, no_wait, repeat_loop, status
+        AUTO $in.str, $out.str
+
+; Initialize constants.
+
+        no_wait = 1
+        do_wait = 0
+
+        lun = 7
+
+; Attach the TCP device (mode=4 means allocate next available LUN).
+
+        ATTACH (lun, 4) "TCP"
+        status = IOSTAT(lun)            ;Check status of ATTACH
+        IF status < 0 THEN
+            TYPE "Error from ATTACH:", $ERROR(status)
+            GOTO 100
+        END
+
+; Set up a socket with local port #1234, to accept 5 client
+; connections, with a buffer size of 1024 bytes.
+
+        FOPEN (lun, 16) "/LOCAL_PORT 1234 /CLIENTS 5 /BUFFER_SIZE 1024"
+        status = IOSTAT(lun)            ;Check status of ATTACH
+        IF status < 0 THEN
+            TYPE "Error from FOPEN:", $ERROR(status)
+            GOTO 100
+        END
+
+        repeat_loop = TRUE
+        WHILE repeat_loop DO
+            WAIT
+            READ (lun, handle, do_wait) $in.str
+            status = IOSTAT(lun)
+            CASE status OF
+              VALUE 1:                  ;Success--echo string back
+                $out.str = $in.str
+                TYPE "Received string: ", $out.str
+                WRITE (lun, handle) $out.str, /N
+
+              VALUE 100:                ;New connection opened
+                TYPE "Newconnection established. Handle =", handle
+
+              VALUE 101:                ;Connection closed
+                TYPE "Connection closed.  Handle =", handle
+                FCMND (lun, 600) $INTB(handle) ;Deallocates handle
+                status = IOSTAT(lun)    ;Check status of FCMND
+                IF status < 0 THEN
+                    TYPE "Error from FCMND:", $ERROR(status)
+                    GOTO 100
+                END
+                WAIT
+              VALUE -526:               ;No data received
+              ANY                       ;Some other error
+                TYPE "Error during READ:   ", $ERROR(status)
+                GOTO 100
+            END
+        END
+
+; Close all open client connections, and release the logical unit.
+
+   100  FCLOSE (lun)
+        DETACH (lun)
+
+        RETURN
+.END
