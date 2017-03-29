@@ -1,0 +1,76 @@
+.PROGRAM tst.tcp.clnt()
+;-------------------------------------------------------------------------
+; ABSTRACT: Example TCP/IP client program.
+;
+; NOTES: This program will continuously ask for an input string.  The
+;        input string is displayed, the string is then sent to the server
+;        controller, and the server response is displayed.  If the string
+;        is "quit", the client program stops and the connection is broken.
+;        Reexecuting the program, reestablishes the connection with the
+;        server.
+;
+; INPUT PARMS:  None
+; OUTPUT PARMS: None
+;-------------------------------------------------------------------------
+        AUTO do_wait, lun, mlun, repeat_loop, status
+        AUTO $inp_str, $read_str
+
+; Initialize constants.
+
+        do_wait = 0
+
+; Attach to the TCP device
+
+        ATTACH (lun, 4) "TCP"
+        TYPE "lun: ", lun
+        status = IOSTAT(lun)            ;Check status of ATTACH
+        IF status < 0 THEN
+            TYPE "Error from ATTACH: ", $ERROR(status)
+            GOTO 100
+        END
+
+; "cell2" is the name this controller uses to refer to the server machine,
+; as defined either in the default controller configuration or by using an
+; FSET command or instruction.  A local port number is automatically
+; establised, since the /LOCAL_PORT keyword is absent.  The remote port
+; number for the server must be known--"1234" in this case.  The buffer
+; size is set to 1024 bytes.
+
+        FOPEN (lun, 0) "cell2 /REMOTE_PORT 1234 /BUFFER_SIZE 1024"
+        status = IOSTAT(lun)            ;Check status of FOPEN
+        IF status < 0 THEN
+            TYPE "Error from FOPEN: ", $ERROR(status)
+            GOTO 100
+        END
+
+; Attach the V+ Monitor and prepare for I/O.
+
+        mlun = 4
+        ATTACH (mlun)
+        FOPEN (mlun)
+
+; Loop until string is "quit". Send the str and read the echo from server.
+
+        repeat_loop = TRUE
+        WHILE repeat_loop DO
+            TYPE "Input a string: ", /S
+            READ (mlun) $inp_str        ;Get input from Monitor
+            WRITE (lun) $inp_str        ;Send to the server
+            TYPE "The string typed is: ", $inp_str
+            TYPE
+            IF $inp_str == "quit" THEN
+                repeat_loop = FALSE     ;We're going to stop
+            END
+            READ (lun, do_wait) $read_str ;Get reply from the server
+            TYPE "The echoed string is: ", $read_str
+        END
+
+; Close open connection and access to Monitor, and release logical units.
+
+   100  FCLOSE (lun)
+        DETACH (lun)
+        FCLOSE (mlun)
+        DETACH (mlun)
+
+        RETURN
+.END
