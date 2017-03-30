@@ -1,0 +1,10 @@
+.PROGRAM test_string()
+
+  auto $input_str
+  $input_str = "";
+
+  MOVES input_str
+
+
+
+.END
