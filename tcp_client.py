@@ -24,10 +24,10 @@ class connection:
         return s
 
     def close_connection(self):
-        socket.close()
+        self.socket.close()
 
 
-    def send_ints(robot, point):
+    def send_ints(self,robot, point):
         message = str(robot)
         for number in point:
             message += ','
@@ -36,9 +36,10 @@ class connection:
         socket.send(message)
         return socket.recv(1024)
 
-    def send_packet(pckt):
+    def send_packet(self,pckt):
         msg = str(pckt)
-        print msg
+        self.socket.send(msg)
+        return self.socket.recv(1024)
 
 
 

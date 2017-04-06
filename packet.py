@@ -15,7 +15,7 @@ class point:
         self.z = in_z
         self.r = in_r
         self.p = in_p
-        self.y = in_t
+        self.t = in_t
 
     def __str__(self):
         return str(self.x)+","+str(self.y)+","+str(self.z)+","+str(self.r)+","+str(self.p)+","+str(self.t)
@@ -26,11 +26,14 @@ class packet:
     robot   = 0
     speed   = 0
     data    = 0
+    index   = 0
 
-    def __init__(self,in_status,in_robot,in_speed,in_data):
-        self.status  = in_status
-        self.robot   = in_robot
-        self.speed   = in_speed
-        self.data    = in_data
+    def __init__(self,in_status,in_robot,in_speed,in_index,in_data):
+        self.status = in_status
+        self.robot  = in_robot
+        self.speed  = in_speed
+        self.index  = in_index
+        self.data   = in_data
+
     def __str__(self):
-        return str(self.status)+","+str(self.robot)+","+str(self.speed)+","+str(self.data)
+        return str(self.status)+","+str(self.robot)+","+str(self.speed)+","+str(self.index)+","+str(self.data)
