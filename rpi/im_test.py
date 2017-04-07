@@ -4,7 +4,7 @@ import cv2
 
 
 img = cv2.imread('ray.jpg',0)
-input_video = cv2.VideoCapture(0,0)
+input_video = cv2.VideoCapture(0)
 
 while 1:
     ret,frame = input_video.read()
