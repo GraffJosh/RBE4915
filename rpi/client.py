@@ -17,16 +17,18 @@ def send(frame, IP, Port):
 UDP_IP = "192.168.10.6"
 UDP_PORT = 1234
 
-#cam0 = cv2.VideoCapture(0)
+cam0 = cv2.VideoCapture(0)
 #cam1 = cv2.VideoCapture(1)
+time.sleep(1)
 
 while(True):
-#    ret, frame0 = cam0.read()
+    ret, frame0 = cam0.read()
 #    ret, frame1 = cam1.read()
 #    cv2.imshow('frame0',frame0)
 #    send(frame0, UDP_IP, 1234)
-    send("hello", UDP_IP, 1234)
-    time.sleep(1)
+    cv2.imshow("cam0",frame0)
+    # send("hello", UDP_IP, 1234)
+    # time.sleep(1)
     #send(frame1, UDP_IP, 1235)
     #d0 = frame0.flatten ()
     #s0 = d0.tostring ()
