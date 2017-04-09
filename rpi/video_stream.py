@@ -31,7 +31,7 @@ class VideoStream:
 
 	def read(self):
 		# return the frame most recently read
-		return self.frame
+		return self.grabbed,self.frame
 
 	def stop(self):
 		# indicate that the thread should be stopped
