@@ -8,7 +8,7 @@ def send(frame, IP, Port):
     s = d.tostring ()
     sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
     for i in range(20):
-        sock.sendto (s[i*46080:(i+1)*46080],(UDP_IP, UDP_PORT))
+        sock.sendto (s[i*46080:(i+1)*46080],(IP,Port))
 
 
 
@@ -21,9 +21,9 @@ cam1 = cv2.VideoCapture(1)
 while(True):
     ret, frame0 = cam0.read()
     ret, frame1 = cam1.read()
-
+    #cv2.imshow('frame0',frame0)
     send(frame0, UDP_IP, 1234)
-    send(frame1, UDP_IP, 1235)
+    #send(frame1, UDP_IP, 1235)
     #d0 = frame0.flatten ()
     #s0 = d0.tostring ()
     #d1 = frame1.flatten()
