@@ -25,11 +25,11 @@ while True:
         frame0 = frame0.reshape (480,680,3)
         cv2.imshow('frame',frame0)
         s0=""
-    if len(s1) == (46080*20):
-        frame1 = numpy.fromstring (s1,dtype=numpy.uint8)
-        frame1 = frame1.reshape (480,680,3)
-        cv2.imshow('frame',frame1)
-        s1=""
+    # if len(s1) == (46080*20):
+    #     frame1 = numpy.fromstring (s1,dtype=numpy.uint8)
+    #     frame1 = frame1.reshape (480,680,3)
+    #     cv2.imshow('frame',frame1)
+    #     s1=""
 
     if cv2.waitKey(1) & 0xFF == ord ('q'):
         break
