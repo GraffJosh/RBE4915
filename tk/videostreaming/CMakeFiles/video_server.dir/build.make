@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ubuntu/RBE4915/tk/videostreaming
+CMAKE_SOURCE_DIR = /home/joshgraff/RBE4915/tk/videostreaming
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ubuntu/RBE4915/tk/videostreaming
+CMAKE_BINARY_DIR = /home/joshgraff/RBE4915/tk/videostreaming
 
 # Include any dependencies generated for this target.
 include CMakeFiles/video_server.dir/depend.make
@@ -51,17 +51,17 @@ include CMakeFiles/video_server.dir/flags.make
 
 CMakeFiles/video_server.dir/video_server.cpp.o: CMakeFiles/video_server.dir/flags.make
 CMakeFiles/video_server.dir/video_server.cpp.o: video_server.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/RBE4915/tk/videostreaming/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/joshgraff/RBE4915/tk/videostreaming/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/video_server.dir/video_server.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/video_server.dir/video_server.cpp.o -c /home/ubuntu/RBE4915/tk/videostreaming/video_server.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/video_server.dir/video_server.cpp.o -c /home/joshgraff/RBE4915/tk/videostreaming/video_server.cpp
 
 CMakeFiles/video_server.dir/video_server.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/video_server.dir/video_server.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/ubuntu/RBE4915/tk/videostreaming/video_server.cpp > CMakeFiles/video_server.dir/video_server.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/joshgraff/RBE4915/tk/videostreaming/video_server.cpp > CMakeFiles/video_server.dir/video_server.cpp.i
 
 CMakeFiles/video_server.dir/video_server.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/video_server.dir/video_server.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/ubuntu/RBE4915/tk/videostreaming/video_server.cpp -o CMakeFiles/video_server.dir/video_server.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/joshgraff/RBE4915/tk/videostreaming/video_server.cpp -o CMakeFiles/video_server.dir/video_server.cpp.s
 
 CMakeFiles/video_server.dir/video_server.cpp.o.requires:
 .PHONY : CMakeFiles/video_server.dir/video_server.cpp.o.requires
@@ -81,48 +81,35 @@ video_server_EXTERNAL_OBJECTS =
 
 video_server: CMakeFiles/video_server.dir/video_server.cpp.o
 video_server: CMakeFiles/video_server.dir/build.make
-video_server: /usr/lib/libopencv_vstab.so.2.4.13
-video_server: /usr/lib/libopencv_tegra.so.2.4.13
-video_server: /usr/lib/libopencv_imuvstab.so.2.4.13
-video_server: /usr/lib/libopencv_facedetect.so.2.4.13
-video_server: /usr/lib/libopencv_esm_panorama.so.2.4.13
-video_server: /usr/lib/libopencv_detection_based_tracker.so.2.4.13
-video_server: /usr/lib/libopencv_videostab.so.2.4.13
-video_server: /usr/lib/libopencv_video.so.2.4.13
-video_server: /usr/lib/libopencv_ts.a
-video_server: /usr/lib/libopencv_superres.so.2.4.13
-video_server: /usr/lib/libopencv_stitching.so.2.4.13
-video_server: /usr/lib/libopencv_photo.so.2.4.13
-video_server: /usr/lib/libopencv_objdetect.so.2.4.13
-video_server: /usr/lib/libopencv_ml.so.2.4.13
-video_server: /usr/lib/libopencv_legacy.so.2.4.13
-video_server: /usr/lib/libopencv_imgproc.so.2.4.13
-video_server: /usr/lib/libopencv_highgui.so.2.4.13
-video_server: /usr/lib/libopencv_gpu.so.2.4.13
-video_server: /usr/lib/libopencv_flann.so.2.4.13
-video_server: /usr/lib/libopencv_features2d.so.2.4.13
-video_server: /usr/lib/libopencv_core.so.2.4.13
-video_server: /usr/lib/libopencv_contrib.so.2.4.13
-video_server: /usr/lib/libopencv_calib3d.so.2.4.13
-video_server: /usr/lib/libopencv_tegra.so.2.4.13
-video_server: /usr/lib/libopencv_stitching.so.2.4.13
-video_server: /usr/lib/libopencv_gpu.so.2.4.13
-video_server: /usr/lib/libopencv_photo.so.2.4.13
-video_server: /usr/lib/libopencv_legacy.so.2.4.13
-video_server: /usr/local/cuda-6.5/lib/libcufft.so
-video_server: /usr/lib/libopencv_video.so.2.4.13
-video_server: /usr/lib/libopencv_objdetect.so.2.4.13
-video_server: /usr/lib/libopencv_ml.so.2.4.13
-video_server: /usr/lib/libopencv_calib3d.so.2.4.13
-video_server: /usr/lib/libopencv_features2d.so.2.4.13
-video_server: /usr/lib/libopencv_highgui.so.2.4.13
-video_server: /usr/lib/libopencv_imgproc.so.2.4.13
-video_server: /usr/lib/libopencv_flann.so.2.4.13
-video_server: /usr/lib/libopencv_core.so.2.4.13
-video_server: /usr/local/cuda-6.5/lib/libcudart.so
-video_server: /usr/local/cuda-6.5/lib/libnppc.so
-video_server: /usr/local/cuda-6.5/lib/libnppi.so
-video_server: /usr/local/cuda-6.5/lib/libnpps.so
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_videostab.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_video.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_ts.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_superres.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_photo.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_ocl.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_objdetect.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_ml.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_legacy.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_gpu.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_flann.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_features2d.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_core.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_contrib.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_calib3d.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_photo.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_legacy.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_video.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_objdetect.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_ml.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_calib3d.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_features2d.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_flann.so.2.4.8
+video_server: /usr/lib/x86_64-linux-gnu/libopencv_core.so.2.4.8
 video_server: CMakeFiles/video_server.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable video_server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/video_server.dir/link.txt --verbose=$(VERBOSE)
@@ -139,6 +126,6 @@ CMakeFiles/video_server.dir/clean:
 .PHONY : CMakeFiles/video_server.dir/clean
 
 CMakeFiles/video_server.dir/depend:
-	cd /home/ubuntu/RBE4915/tk/videostreaming && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ubuntu/RBE4915/tk/videostreaming /home/ubuntu/RBE4915/tk/videostreaming /home/ubuntu/RBE4915/tk/videostreaming /home/ubuntu/RBE4915/tk/videostreaming /home/ubuntu/RBE4915/tk/videostreaming/CMakeFiles/video_server.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/joshgraff/RBE4915/tk/videostreaming && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/joshgraff/RBE4915/tk/videostreaming /home/joshgraff/RBE4915/tk/videostreaming /home/joshgraff/RBE4915/tk/videostreaming /home/joshgraff/RBE4915/tk/videostreaming /home/joshgraff/RBE4915/tk/videostreaming/CMakeFiles/video_server.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/video_server.dir/depend
 

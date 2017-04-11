@@ -1,4 +1,4 @@
-# Install script for directory: /home/ubuntu/RBE4915/tk/videostreaming
+# Install script for directory: /home/joshgraff/RBE4915/tk/videostreaming
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -38,7 +38,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "/home/ubuntu/RBE4915/tk/videostreaming/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "/home/joshgraff/RBE4915/tk/videostreaming/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "/home/ubuntu/RBE4915/tk/videostreaming/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "/home/joshgraff/RBE4915/tk/videostreaming/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)

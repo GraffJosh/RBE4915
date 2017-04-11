@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ubuntu/RBE4915/tk/videostreaming/video_server.cpp" "/home/ubuntu/RBE4915/tk/videostreaming/CMakeFiles/video_server.dir/video_server.cpp.o"
+  "/home/joshgraff/RBE4915/tk/videostreaming/video_server.cpp" "/home/joshgraff/RBE4915/tk/videostreaming/CMakeFiles/video_server.dir/video_server.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

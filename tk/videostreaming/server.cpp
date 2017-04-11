@@ -41,6 +41,10 @@ udp_server::udp_server(const std::string& addr, int port)
     , f_addr(addr)
 {
     char decimal_port[16];
+
+    image_received = false;
+    std::mutex copy_mutex();
+
     snprintf(decimal_port, sizeof(decimal_port), "%d", f_port);
     decimal_port[sizeof(decimal_port) / sizeof(decimal_port[0]) - 1] = '\0';
     struct addrinfo hints;
@@ -138,29 +142,41 @@ int udp_server::recv(char *msg, size_t max_size)
     return ::recv(f_socket, msg, max_size, 0);
 }
 
-
-int udp_server::receive_image(cv::Mat& msg_buffer, size_t& max_size)
+//PERMANENT LOOP, CALL ASYNCH
+int udp_server::receive_image(cv::Mat* msg_buffer, int& width, int& height)
 {
+
+    size_t max_size = msg_buffer->total()*msg_buffer->elemSize();
     uchar sockData[max_size];
 
     int bytes = 0;
     int image_size = 0;
     char msg[50];
-    if((bytes = ::recv(f_socket, msg, 50, 0))==8)
+
+    while(1)
     {
-      while(bytes != 0 ){
-        if((bytes = ::recv(f_socket, sockData + image_size, max_size, 0))==-1){
-          std::cout << "recv failed" << '\n';
-          return -1;
-        }
-        image_size+=bytes;
-        if(image_size==921600)
+      bytes = 0;
+      image_size = 0;
+        if((bytes = ::recv(f_socket, msg, 50, 0))==8)
         {
-          cv::Mat image_buffer(480, 640, CV_8UC3, sockData);
-          msg_buffer = image_buffer.clone();
-          return 0;
+          while(bytes != 0 ){
+            if((bytes = ::recv(f_socket, sockData + image_size, max_size, 0))==-1){
+              std::cout << "recv failed" << '\n';
+              continue;
+            }
+            image_size+=bytes;
+            if(image_size==921600)
+            {
+              cv::Mat image_buffer(width, height, CV_8UC3, sockData);
+              copy_mutex.lock();
+              image_buffer.copyTo(*msg_buffer);
+              copy_mutex.unlock();
+              image_received = true;
+              continue;
+            }
+          }
         }
-      }
+
     }
     return 0;
 }

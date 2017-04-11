@@ -27,6 +27,8 @@
 #include <unistd.h>
 #include <iostream>
 #include <opencv2/core/core.hpp>
+#include <mutex>
+#include <pthread.h>
 
 namespace udp_client_server
 {
@@ -70,9 +72,10 @@ public:
 
     int                 recv(char *msg, size_t max_size);
 
-    cv::Mat&            receive_image(cv::Mat& msg_buffer, size_t& max_size);
+    int                 receive_image(cv::Mat* msg_buffer, int& width, int& height);
     int                 timed_recv(char *msg, size_t max_size, int max_wait_ms);
-
+    std::mutex          copy_mutex;
+    bool                image_received;
 private:
     int                 f_socket;
     int                 f_port;
