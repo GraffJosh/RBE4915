@@ -31,7 +31,7 @@ def send(frame, IP, Port):
 
 
 
-UDP_IP = "192.168.10.6"
+UDP_IP = "192.168.10.5"
 UDP_PORT = 1234
 
 vs0 = VideoStream(0).start()
