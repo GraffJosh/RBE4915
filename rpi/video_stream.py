@@ -8,7 +8,7 @@ class VideoStream:
 		# from the stream
 		self.instance = src
 		self.stream = cv2.VideoCapture(src)
-		self.stream.set(3, 720)
+		self.stream.set(3,640)
 		self.stream.set(4,480)
 		(self.grabbed, self.frame) = self.stream.read()
 
@@ -34,7 +34,9 @@ class VideoStream:
 
 	def read(self):
 		# return the frame most recently read
-		return self.grabbed,self.frame
+		return_grab = self.grabbed
+		self.grabbed = False
+		return return_grab,self.frame
 
 	def stop(self):
 		# indicate that the thread should be stopped
