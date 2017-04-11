@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ubuntu/RBE4915/videostreaming/server.cpp
+server.h
+/home/ubuntu/RBE4915/videostreaming/server.h
+
+/home/ubuntu/RBE4915/videostreaming/server.h
+sys/types.h
+-
+sys/socket.h
+-
+netdb.h
+-
+stdexcept
+-
+string.h
+-
+unistd.h
+-
+iostream
+-
+
