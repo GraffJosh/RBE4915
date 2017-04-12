@@ -39,6 +39,44 @@ void process(){
   }
 }
 
+void write()
+{
+	// Load input video
+	cv::VideoCapture input_cap(argv[1]);
+	if (!input_cap.isOpened())
+	{
+		std::cout << "!!! Input video could not be opened" << std::endl;
+		return;
+	}
+
+	// Setup output video
+	cv::VideoWriter output_cap(argv[2], 
+		       input_cap.get(CV_CAP_PROP_FOURCC),
+		       input_cap.get(CV_CAP_PROP_FPS),
+		       cv::Size(input_cap.get(CV_CAP_PROP_FRAME_WIDTH),
+		       input_cap.get(CV_CAP_PROP_FRAME_HEIGHT)));
+
+	if (!output_cap.isOpened())
+	{
+		std::cout << "!!! Output video could not be opened" << std::endl;
+		return;
+	}
+
+
+	// Loop to read from input and write to output
+	cv::Mat frame;
+
+	while (true)
+	{       
+	    if (!input_cap.read(frame))             
+		break;
+
+	    output_cap.write(frame);
+	}
+
+	input_cap.release();
+	output_cap.release();
+}
 
 void video(){
 

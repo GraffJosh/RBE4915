@@ -12,6 +12,7 @@ class VideoStream:
 		self.stream.set(3,640)
 		self.stream.set(4,480)
 		self.stream.set(4,10)
+		self.stream.set(11,180)
 		(self.grabbed, self.frame) = self.stream.read()
 
 		# initialize the variable used to indicate if the thread should
