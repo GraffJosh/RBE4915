@@ -1,6 +1,7 @@
 # import the necessary packages
 from threading import Thread
 import cv2
+import time
 
 class VideoStream:
 	def __init__(self, src=0):
@@ -10,6 +11,7 @@ class VideoStream:
 		self.stream = cv2.VideoCapture(src)
 		self.stream.set(3,640)
 		self.stream.set(4,480)
+		self.stream.set(4,10)
 		(self.grabbed, self.frame) = self.stream.read()
 
 		# initialize the variable used to indicate if the thread should
@@ -31,6 +33,7 @@ class VideoStream:
 
 			# otherwise, read the next frame from the stream
 			(self.grabbed, self.frame) = self.stream.read()
+			time.sleep(.01)
 
 	def read(self):
 		# return the frame most recently read
