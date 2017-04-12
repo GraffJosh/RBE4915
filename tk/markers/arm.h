@@ -4,6 +4,7 @@
 #include <aruco/aruco.h>
 #include <aruco/cvdrawingutils.h>
 #include <opencv2/highgui/highgui.hpp>
+#include "../math.cpp"
 
 using namespace std;
 using namespace cv;
@@ -24,11 +25,17 @@ public:
 
 private:
   int arm_num;
+  float rotation_angle;
+
   float link1_len;
   float link2_len;
   float link1_wid;
   float link2_wid;
   float marker_size;
+
+  Mat rotation_matrix;
+  Mat translation_matrix;
+
   Mat input_image;
   MarkerDetector aruco_detector;
   MarkerPoseTracker aruco_tracker;
