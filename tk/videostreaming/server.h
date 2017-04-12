@@ -72,11 +72,13 @@ public:
 
     int                 recv(char *msg, size_t max_size);
 
-    int                 receive_image(cv::Mat* msg_buffer, int& width, int& height);
+    int                 receive_image(int& width, int& height);
+    int                 read_image(cv::Mat* msg_buffer);
     int                 timed_recv(char *msg, size_t max_size, int max_wait_ms);
     std::mutex          copy_mutex;
     bool                image_received;
 private:
+    cv::Mat             received_image;
     int                 f_socket;
     int                 f_port;
     std::string         f_addr;

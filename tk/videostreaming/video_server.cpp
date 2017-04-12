@@ -4,6 +4,7 @@
 #include <future>
 #include <iostream>
 #include <pthread.h>
+#include <arm.h>
 #include "server.cpp"
 
 using namespace udp_client_server;
@@ -15,45 +16,68 @@ udp_client_server::udp_server* image_server;
 void* get_images(void*)
 {
 
-  image_server->receive_image(&received_frame,received_frame.rows, received_frame.cols);
+  image_server->receive_image(received_frame.rows, received_frame.cols);
   pthread_exit(NULL);
 }
 
 int main(int argc, char const *argv[]) {
+
+
+
   int width = 640;
   int height = 480;
   int received_frames = 0;
+  int num_markers = 0;
+
+  VideoWriter outputVideo;
+  if(argc>1)
+  {
+    string argument;
+    argument.append(argv[argc-1]);
+    outputVideo.open("output"+argument+".avi", 0, 10, Size(width,height), true);
+  }
+
   received_frame = Mat::zeros(height,width,CV_8UC3);
-
   image_server = new udp_client_server::udp_server("192.168.10.5",1234);
-
   pthread_create(&receive_thread, NULL, get_images,NULL);
 
+  Arm left_arm(1,received_frame);
+  Mat proc_frame = Mat::zeros(height,width,CV_8UC3);
+
+
   while (1) {
-    /* code */
-    if(image_server->image_received)
-    {
-      if(image_server->copy_mutex.try_lock())
+
+      switch (image_server->read_image(&received_frame))
       {
-        cv::imshow("frame",received_frame);
-        image_server->copy_mutex.unlock();
-      }else{
-        continue;
+        case 0:
+          // cv::imshow("frame",received_frame);
+          if (outputVideo.isOpened())
+          {
+            outputVideo <<received_frame;
+          }
+          received_frames++;
+          break;
+        case 1:
+          // cv::imshow("frame",received_frame);
+          break;
+        case -2:
+          std::cout << "Mutex Error" << '\n';
+          // usleep(100);
+          continue;
       }
-      std::cout << "frames received: " << received_frames << '\n';
-      received_frames++;
-      cv::waitKey(1);
+
+
+    if(received_frames >0 )
+    {
+          num_markers = left_arm.detect_arm();
+          received_frame.copyTo(proc_frame);
+          left_arm.draw_markers(proc_frame);
+          left_arm.draw_box(proc_frame);
+          cv::imshow("frame",proc_frame);
     }
-
-
-        usleep(10000);
-    // if(!image_server.receive_image(received_frame, frame_size))
-    // {
-    //   cv::imshow("frame",received_frame);
-    //   std::cout << "frames received: " << received_frames << '\n';
-    //   received_frames++;
-    //   cv::waitKey(1);
-    // }
+      // std::cout << "frames received: " << received_frames << '\n';
+      cv::waitKey(1);
+      usleep(10000);
 
   }
   delete image_server;

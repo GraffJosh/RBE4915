@@ -1,4 +1,4 @@
-# Install script for directory: /home/ubuntu/RBE4915/tk
+# Install script for directory: /home/joshgraff/RBE4915/tk
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -32,13 +32,20 @@ IF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
   SET(CMAKE_INSTALL_SO_NO_EXE "1")
 ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
+IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for each subdirectory.
+  INCLUDE("/home/joshgraff/RBE4915/tk/markers/cmake_install.cmake")
+  INCLUDE("/home/joshgraff/RBE4915/tk/videostreaming/cmake_install.cmake")
+
+ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
+
 IF(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest_${CMAKE_INSTALL_COMPONENT}.txt")
 ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "/home/ubuntu/RBE4915/tk/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "/home/joshgraff/RBE4915/tk/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "/home/ubuntu/RBE4915/tk/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "/home/joshgraff/RBE4915/tk/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)

@@ -143,12 +143,11 @@ int udp_server::recv(char *msg, size_t max_size)
 }
 
 //PERMANENT LOOP, CALL ASYNCH
-int udp_server::receive_image(cv::Mat* msg_buffer, int& width, int& height)
+int udp_server::receive_image(int& width, int& height)
 {
-
-    size_t max_size = msg_buffer->total()*msg_buffer->elemSize();
+    received_image = cv::Mat::zeros(height,width,CV_8UC3);
+    size_t max_size =received_image.total()*received_image.elemSize();// width*height*3;//
     uchar sockData[max_size];
-
     int bytes = 0;
     int image_size = 0;
     char msg[50];
@@ -165,11 +164,11 @@ int udp_server::receive_image(cv::Mat* msg_buffer, int& width, int& height)
               continue;
             }
             image_size+=bytes;
-            if(image_size==921600)
+            if(image_size==(int)max_size)
             {
               cv::Mat image_buffer(width, height, CV_8UC3, sockData);
               copy_mutex.lock();
-              image_buffer.copyTo(*msg_buffer);
+              image_buffer.copyTo(received_image);
               copy_mutex.unlock();
               image_received = true;
               continue;
@@ -179,6 +178,29 @@ int udp_server::receive_image(cv::Mat* msg_buffer, int& width, int& height)
 
     }
     return 0;
+}
+
+
+//if there is a new image, it copies it to the passed buffer.
+//if there isn't returns 1.
+//if it can get the mutex it copies to the passed buffer.
+//if it can't, it returns -2
+int udp_server::read_image(cv::Mat* msg_buffer)
+{
+  if(image_received)
+  {
+    if(copy_mutex.try_lock())
+    {
+      received_image.copyTo(*msg_buffer);
+      copy_mutex.unlock();
+      image_received = false;
+      return 0;
+    }else{
+      return -2;
+    }
+  }else{
+    return 1;
+  }
 }
 /** \brief Wait for data to come in.
  *
