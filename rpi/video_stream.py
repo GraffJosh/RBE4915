@@ -9,10 +9,10 @@ class VideoStream:
 		# from the stream
 		self.instance = src
 		self.stream = cv2.VideoCapture(src)
-		self.stream.set(3,640)
-		self.stream.set(4,480)
-		self.stream.set(4,10)
-		self.stream.set(11,180)
+		self.stream.set(3,1280)
+		self.stream.set(4,720)
+		# self.stream.set(4,10)
+		# self.stream.set(11,180)
 		(self.grabbed, self.frame) = self.stream.read()
 
 		# initialize the variable used to indicate if the thread should
