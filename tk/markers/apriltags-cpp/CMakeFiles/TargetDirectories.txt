@@ -1,6 +1,0 @@
-/home/joshgraff/RBE4915/tk/markers/apriltags-cpp/src/CMakeFiles/apriltags.dir
-/home/joshgraff/RBE4915/tk/markers/apriltags-cpp/src/CMakeFiles/camtest.dir
-/home/joshgraff/RBE4915/tk/markers/apriltags-cpp/src/CMakeFiles/gltest.dir
-/home/joshgraff/RBE4915/tk/markers/apriltags-cpp/src/CMakeFiles/maketags.dir
-/home/joshgraff/RBE4915/tk/markers/apriltags-cpp/src/CMakeFiles/quadtest.dir
-/home/joshgraff/RBE4915/tk/markers/apriltags-cpp/src/CMakeFiles/tagtest.dir

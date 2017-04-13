@@ -1,19 +1,8 @@
 cmake_minimum_required(VERSION 2.8)
+set (CMAKE_CXX_FLAGS "-std=c++11 -pthread ${CMAKE_CXX_FLAGS}")
 
 project (main_project)
 
-find_package(OpenCV REQUIRED)
 
-include_directories(${OpenCV_INCLUDE_DIRS})
-
-#add_executable(cv_hello hello_world_cv.cpp)
-#add_executable(cv_mat cv_mat.cpp)
-#add_executable(imageread imageread.cpp)
-
-#target_link_libraries(cv_hello ${OpenCV_LIBS})
-#target_link_libraries(imageread ${OpenCV_LIBS})
-#target_link_libraries(cv_mat ${OpenCV_LIBS})
-
-
-add_subdirectory(markers)
-add_subdirectory(videostreaming)
+add_subdirectory(arms)
+add_subdirectory(servers)

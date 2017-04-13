@@ -5,7 +5,8 @@
 #include <iostream>
 #include <pthread.h>
 #include <arm_aruco.h>
-#include "server.cpp"
+// #include <arm_april.h>
+#include "server.h"
 
 using namespace udp_client_server;
 using namespace cv;
@@ -41,7 +42,7 @@ int main(int argc, char const *argv[]) {
   image_server = new udp_client_server::udp_server("192.168.10.5",1234);
   pthread_create(&receive_thread, NULL, get_images,NULL);
 
-  Arm left_arm(1,received_frame);
+  Arm_aruco left_arm(1,received_frame);
   Mat proc_frame = Mat::zeros(height,width,CV_8UC3);
   Mat draw_frame = Mat::zeros(height,width,CV_8UC3);
 

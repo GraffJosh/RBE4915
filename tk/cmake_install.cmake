@@ -34,8 +34,8 @@ ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/home/joshgraff/RBE4915/tk/markers/cmake_install.cmake")
-  INCLUDE("/home/joshgraff/RBE4915/tk/videostreaming/cmake_install.cmake")
+  INCLUDE("/home/joshgraff/RBE4915/tk/arms/cmake_install.cmake")
+  INCLUDE("/home/joshgraff/RBE4915/tk/servers/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 
