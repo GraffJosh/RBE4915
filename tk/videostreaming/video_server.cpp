@@ -24,8 +24,8 @@ int main(int argc, char const *argv[]) {
 
 
 
-  int width = 640;
-  int height = 480;
+  int width = 1280;
+  int height = 720;
   int received_frames = 0;
   int num_markers = 0;
 
