@@ -4,7 +4,7 @@
 #include <future>
 #include <iostream>
 #include <pthread.h>
-#include <arm.h>
+#include <arm_aruco.h>
 #include "server.cpp"
 
 using namespace udp_client_server;
@@ -24,8 +24,8 @@ int main(int argc, char const *argv[]) {
 
 
 
-  int width = 1280;
-  int height = 720;
+  int width = 640;
+  int height = 480;
   int received_frames = 0;
   int num_markers = 0;
 
@@ -34,7 +34,7 @@ int main(int argc, char const *argv[]) {
   {
     string argument;
     argument.append(argv[argc-1]);
-    outputVideo.open("output"+argument+".avi", 0, 10, Size(width,height), true);
+    outputVideo.open("output"+argument, 0, 10, Size(width,height), true);
   }
 
   received_frame = Mat::zeros(height,width,CV_8UC3);
@@ -43,6 +43,7 @@ int main(int argc, char const *argv[]) {
 
   Arm left_arm(1,received_frame);
   Mat proc_frame = Mat::zeros(height,width,CV_8UC3);
+  Mat draw_frame = Mat::zeros(height,width,CV_8UC3);
 
 
   while (1) {
@@ -71,9 +72,10 @@ int main(int argc, char const *argv[]) {
     {
           num_markers = left_arm.detect_arm();
           received_frame.copyTo(proc_frame);
-          left_arm.draw_markers(proc_frame);
-          left_arm.draw_box(proc_frame);
-          cv::imshow("frame",proc_frame);
+          proc_frame.copyTo(draw_frame);
+          left_arm.draw_markers(draw_frame);
+          left_arm.draw_box(draw_frame);
+          cv::imshow("frame",draw_frame);
     }
       // std::cout << "frames received: " << received_frames << '\n';
       cv::waitKey(1);

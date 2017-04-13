@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/joshgraff/RBE4915/tk/markers/apriltags-cpp/src/AprilTypes.h
+opencv2/core/core.hpp
+-
+stdint.h
+-
+float.h
+-
+
+/home/joshgraff/RBE4915/tk/markers/apriltags-cpp/src/TagDetection.h
+AprilTypes.h
+/home/joshgraff/RBE4915/tk/markers/apriltags-cpp/src/AprilTypes.h
+
+/home/joshgraff/RBE4915/tk/markers/apriltags-cpp/src/TagFamily.h
+vector
+-
+string
+-
+TagDetection.h
+/home/joshgraff/RBE4915/tk/markers/apriltags-cpp/src/TagDetection.h
+
+/home/joshgraff/RBE4915/tk/markers/apriltags-cpp/src/maketags.cpp
+TagFamily.h
+/home/joshgraff/RBE4915/tk/markers/apriltags-cpp/src/TagFamily.h
+cairo/cairo.h
+-
+cairo/cairo-pdf.h
+-
+stdio.h
+-
+iostream
+-
+sstream
+-
+stdlib.h
+-
+ctype.h
+-
+

@@ -11,5 +11,5 @@ find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS} ../markers)
 
 add_executable(video_server video_server.cpp)
-add_dependencies(video_server aruco)
-target_link_libraries(video_server aruco arm ${OpenCV_LIBS})
+add_dependencies(video_server markers arm)
+target_link_libraries(video_server ${OpenCV_LIBS})
