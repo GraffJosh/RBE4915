@@ -17,7 +17,7 @@ class connection:
 
     def start_connection(self):
         TCP_IP = self.ip_addr
-        TCP_PORT = 1234
+        TCP_PORT = 5005
         BUFFER_SIZE = 1024
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((TCP_IP, TCP_PORT))

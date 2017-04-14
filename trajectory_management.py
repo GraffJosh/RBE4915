@@ -10,7 +10,7 @@ def create_trajectory(robot, speed):
 
 
     angle = 180
-    radius = 200
+    radius = 150
     x= 400
     y = 0
     for i in range(0,62):

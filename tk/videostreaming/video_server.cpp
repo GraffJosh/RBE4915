@@ -9,7 +9,7 @@ using namespace std;
 int main(int argc, char const *argv[]) {
 
 
-  udp_client_server::udp_server image_server("192.168.10.6",1234);
+  udp_client_server::udp_server image_server("192.168.10.5",1234);
   int width = 640;
   int height = 480;
   int received_frames = 0;
