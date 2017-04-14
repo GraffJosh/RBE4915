@@ -5,7 +5,7 @@ import packet as pckt
 
 
 def create_circle(robot, speed):
-    start_packet = pckt.packet(3,robot, speed,0,0) #start message
+    start_packet = pckt.packet(3,robot, speed,0,0) #3 is start message
     trajectory=[start_packet]
 
 
@@ -23,15 +23,22 @@ def create_circle(robot, speed):
         # x = 450
         # y = -450
         # z= 375
-        trajectory.append(pckt.packet(2, robot,speed,i,pckt.point(x,y,z,0,180,0))) #pose msg
+        trajectory.append(pckt.packet(2, robot,speed,i,pckt.point(x,y,z,0,180,0))) #2 is pose msg
 
 
-    trajectory.append(pckt.packet(1,robot, speed, 0,0)) #execute message
+    trajectory.append(pckt.packet(1,robot, speed, 0,0)) #1 is execute message
+    return trajectory
+
+
+def go_to_point(speed,x,y,z):
+    start_packet = pckt.packet(4,1, speed,0,pckt.point(x,y,z,0,180,0)) #4 means point message
+    trajectory=[start_packet]
     return trajectory
 
 tcp = client.connection('192.168.10.64')
 
-trajectory = create_circle(1,50)
+#trajectory = create_circle(1,50)
+trajectory = go_to_point(100,400,00,300)
 i=0
 for pckt in trajectory:
     print pckt
