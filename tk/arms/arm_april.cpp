@@ -8,7 +8,7 @@ TagTestOptions create_options(){
   opts.be_verbose = true;
   opts.no_images = true;
   opts.generate_output_files = false;
-  opts.params.segDecimate = false;
+  opts.params.segDecimate = false;//false is best
   // opts.params.sigma =;
   opts.params.segSigma =.8;
   opts.params.thetaThresh = 150;
@@ -75,12 +75,13 @@ int Arm_april::draw_markers(Mat& frame_ref)
   // frame_ref = tag_family->superimposeDetections(frame_ref, detections);
   if(detected){
     frame_ref = tag_family->superimposeDetection(frame_ref, arm_marker);
-    std::cout << "arm: " << arm_marker.cxy <<'\n';
+    // std::cout << "arm: " << arm_marker.cxy <<'\n';
   }
 
 }
 int Arm_april::draw_box(Mat& frame_ref)
 {
+  std::vector<int> v;
   if(detected)
   {
       rectangle(frame_ref,  link2_back,
@@ -91,6 +92,6 @@ int Arm_april::draw_box(Mat& frame_ref)
                         arm_marker.interpolate(link2_aft,0),
                         Scalar( 255, 0, 255 ),
                         0,8);
-}
+  }
 
 }
