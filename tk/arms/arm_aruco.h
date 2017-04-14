@@ -1,21 +1,19 @@
-#ifndef arm_h
-#define arm_h value
+#ifndef arm_aruco_h
+#define arm_aruco_h value
 #include <iostream>
 #include <aruco/aruco.h>
 #include <aruco/cvdrawingutils.h>
 #include <opencv2/highgui/highgui.hpp>
-#include "../math.cpp"
-
 using namespace std;
 using namespace cv;
 using namespace aruco;
 
-class Arm{
+class Arm_aruco{
 
 
 public:
-            Arm(int fid_num, Mat& frame_ptr);
-            ~Arm();
+            Arm_aruco(int fid_num, Mat& frame_ptr);
+            ~Arm_aruco();
 
   Marker    get_arm_marker();
 
