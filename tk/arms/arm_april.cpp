@@ -30,7 +30,7 @@ Arm_april::Arm_april(int fid_num, Mat& frame_ref)
   draw_image = frame_ref;
   arm_num= fid_num;
 
-  link2_for = -17;
+  link2_for = -12;
   link2_aft = 6;
   link2_wid = 3.5;
   link1_len = 20;
@@ -58,6 +58,7 @@ int Arm_april::detect_arm()
     const TagDetection& d = detections[i];
     if(d.id == arm_num)
     {
+      detected = true;
       arm_marker = d;
       arm_tracker.attach_marker(arm_marker);
       arm_tracker.filter();
@@ -72,15 +73,15 @@ int Arm_april::draw_markers(Mat& frame_ref)
 {
   // cv::Mat img = tag_family.superimposeDetections(frame_ref, detections);
   // frame_ref = tag_family->superimposeDetections(frame_ref, detections);
-  // if(arm_marker.good){
+  if(detected){
     frame_ref = tag_family->superimposeDetection(frame_ref, arm_marker);
     std::cout << "arm: " << arm_marker.cxy <<'\n';
-  // }
+  }
 
 }
 int Arm_april::draw_box(Mat& frame_ref)
 {
-  if(arm_marker.good)
+  if(detected)
   {
       rectangle(frame_ref,  link2_back,
                         link2_front,

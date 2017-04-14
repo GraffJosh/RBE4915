@@ -52,6 +52,7 @@ public:
 private:
   int arm_num;
   float rotation_angle;
+  bool detected=false;
 
   float link2_for;
   float link2_aft;
