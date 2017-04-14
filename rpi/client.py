@@ -17,7 +17,7 @@ def send(frame, IP, Port):
     s0 = d0.tostring ()
 
     frame_size = len(d0)
-    packet_size = 10000#bits
+    packet_size = 50000#bits
     num_packets = int(frame_size/packet_size) + 1
     shibboleth = "01234567"
     sock.sendto (shibboleth.encode('utf-8'),(IP,Port))
