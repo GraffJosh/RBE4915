@@ -5,6 +5,7 @@
 #include "apriltags-cpp/src/Geometry.h"
 #include "apriltags-cpp/src/DebugImage.h"
 #include <opencv2/highgui/highgui.hpp>
+#include "tracker.h"
 
 #define DEFAULT_TAG_FAMILY "Tag16h5"
 
@@ -52,10 +53,15 @@ private:
   int arm_num;
   float rotation_angle;
 
-  float link1_len;
-  float link2_len;
-  float link1_wid;
+  float link2_for;
+  float link2_aft;
   float link2_wid;
+  float link1_len;
+  float link1_wid;
+  Point2d link1_front;
+  Point2d link2_front;
+  Point2d link1_back;
+  Point2d link2_back;
   float marker_size;
 
   Mat rotation_matrix;
@@ -64,10 +70,12 @@ private:
   Mat draw_image;
 
   cv::Point2d opticalCenter;
-
   TagFamily* tag_family;
   TagDetector* tag_detector;
+  TagDetection arm_marker;
   TagDetectionArray detections;
+  Tracker arm_tracker;
+
 
 };
 

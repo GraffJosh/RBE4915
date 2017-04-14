@@ -75,6 +75,7 @@ int main(int argc, char const *argv[]) {
           received_frame.copyTo(proc_frame);
           proc_frame.copyTo(draw_frame);
           left_arm.draw_markers(draw_frame);
+          left_arm.draw_box(draw_frame);
           cv::imshow("frame",draw_frame);
     }
       // std::cout << "frames received: " << received_frames << '\n';

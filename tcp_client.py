@@ -17,8 +17,8 @@ class connection:
 
     def start_connection(self):
         TCP_IP = self.ip_addr
-        TCP_PORT = 1234
-        BUFFER_SIZE = 1024
+        TCP_PORT = 5005
+        BUFFER_SIZE = 300
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((TCP_IP, TCP_PORT))
         return s
@@ -39,7 +39,8 @@ class connection:
     def send_packet(self,pckt):
         msg = str(pckt)
         self.socket.send(msg)
-        return self.socket.recv(1024)
+        time.sleep(.5)
+        return self.socket.recv(300)
 
 
 

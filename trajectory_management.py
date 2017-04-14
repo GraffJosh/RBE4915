@@ -4,13 +4,13 @@ import tcp_client as client
 import packet as pckt
 
 
-def create_trajectory(robot, speed):
+def create_circle(robot, speed):
     start_packet = pckt.packet(3,robot, speed,0,0) #start message
     trajectory=[start_packet]
 
 
     angle = 180
-    radius = 200
+    radius =150
     x= 400
     y = 0
     for i in range(0,62):
@@ -31,10 +31,12 @@ def create_trajectory(robot, speed):
 
 tcp = client.connection('192.168.10.64')
 
-trajectory = create_trajectory(1,50)
+trajectory = create_circle(1,50)
+i=0
 for pckt in trajectory:
     print pckt
-    print tcp.send_packet(pckt) +"\n"
+    print str(tcp.send_packet(pckt))+" " +str(i)+"\n"
+    i+=1
     pass
 
 tcp.close_connection()

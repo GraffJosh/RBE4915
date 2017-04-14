@@ -30,17 +30,18 @@ Arm_april::Arm_april(int fid_num, Mat& frame_ref)
   draw_image = frame_ref;
   arm_num= fid_num;
 
-  link1_len = .85;//meters
-  link2_len = .6;//meters
-  link1_wid = .85;//meters
-  link2_wid = .6;//meters
-
-  marker_size = 2.0f;//0.0508f;
+  link2_for = -17;
+  link2_aft = 6;
+  link2_wid = 3.5;
+  link1_len = 20;
+  link1_wid = 3.5;
+  marker_size = 46.0375f;//mm;//1.8125;//inches
 
   TagTestOptions opts = create_options();
-   tag_family= new TagFamily(opts.family_str);
-   tag_detector=new TagDetector(*tag_family, opts.params);
+  tag_family= new TagFamily(opts.family_str);
+  tag_detector=new TagDetector(*tag_family, opts.params);
   opticalCenter = Point2d(0.5*detection_image.rows, 0.5*detection_image.cols);
+  arm_tracker.set_rate(1);
 }
 Arm_april::~Arm_april()
 {
@@ -48,26 +49,47 @@ Arm_april::~Arm_april()
   delete tag_detector;
 }
 
+
 int Arm_april::detect_arm()
 {
   tag_detector->process(detection_image, opticalCenter, detections);
 
-
   for (size_t i=0; i<detections.size(); ++i) {
     const TagDetection& d = detections[i];
-    std::cout << " - Detection: id = " << d.id << ", "
-              << "code = " << d.code << ", "
-              << "rotation = " << d.rotation << "\n";
-            }
+    if(d.id == arm_num)
+    {
+      arm_marker = d;
+      arm_tracker.attach_marker(arm_marker);
+      arm_tracker.filter();
+      link2_front = arm_tracker.interpolate(link2_for, 0);
+      link2_back = arm_tracker.interpolate(link2_aft,0);
+
+    }
+  }
 }
 
 int Arm_april::draw_markers(Mat& frame_ref)
 {
   // cv::Mat img = tag_family.superimposeDetections(frame_ref, detections);
-  frame_ref = tag_family->superimposeDetections(frame_ref, detections);
+  // frame_ref = tag_family->superimposeDetections(frame_ref, detections);
+  // if(arm_marker.good){
+    frame_ref = tag_family->superimposeDetection(frame_ref, arm_marker);
+    std::cout << "arm: " << arm_marker.cxy <<'\n';
+  // }
+
 }
 int Arm_april::draw_box(Mat& frame_ref)
 {
-  // cv::Mat img = tag_family.superimposeDetections(frame_ref, detections);
-  frame_ref = tag_family->superimposeDetections(frame_ref, detections);
+  if(arm_marker.good)
+  {
+      rectangle(frame_ref,  link2_back,
+                        link2_front,
+                        Scalar( 0, 255, 255 ),
+                        0,8);
+      rectangle(frame_ref,  arm_marker.interpolate(link2_for, 0),
+                        arm_marker.interpolate(link2_aft,0),
+                        Scalar( 255, 0, 255 ),
+                        0,8);
+}
+
 }
