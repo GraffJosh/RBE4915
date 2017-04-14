@@ -39,7 +39,7 @@ class connection:
     def send_packet(self,pckt):
         msg = str(pckt)
         self.socket.send(msg)
-        time.sleep(.5)
+        # time.sleep(.5)
         return self.socket.recv(300)
 
 
