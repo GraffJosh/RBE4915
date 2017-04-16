@@ -1,4 +1,4 @@
-#include <Python.h>
+
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -7,6 +7,7 @@
 #include <pthread.h>
 #include <arm_aruco.h>
 #include <arm_april.h>
+#include <arm_control.h>
 #include "server.h"
 
 using namespace udp_client_server;
@@ -40,9 +41,11 @@ int main(int argc, char const *argv[]) {
   image_server = new udp_client_server::udp_server("192.168.10.5",1234);
   pthread_create(&receive_thread, NULL, get_images,NULL);
 
-  Arm_april left_arm(11,received_frame);
-  Mat proc_frame = Mat::zeros(height,width,CV_8UC3);
-  Mat draw_frame = Mat::zeros(height,width,CV_8UC3);
+  Arm_april left_arm(11,received_frame);              //tracking and arm management
+  Arm_Control left_control(1,"192.168.10.64",5005);
+  cout<<left_control.send_point(50,400,-400,375)<<'\n';
+  Mat proc_frame = Mat::zeros(height,width,CV_8UC3);  //unpainted frame for processing
+  Mat draw_frame = Mat::zeros(height,width,CV_8UC3);  //painted frame for people
 
 
   while (1) {
@@ -75,6 +78,7 @@ int main(int argc, char const *argv[]) {
           left_arm.draw_markers(draw_frame);
           left_arm.draw_box(draw_frame);
           cv::imshow("frame",draw_frame);
+
     }
       // std::cout << "frames received: " << received_frames << '\n';
       cv::waitKey(1);
