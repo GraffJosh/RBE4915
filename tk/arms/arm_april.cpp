@@ -30,18 +30,13 @@ Arm_april::Arm_april(int fid_num, Mat& frame_ref)
   draw_image = frame_ref;
   arm_num= fid_num;
 
-  link2_for = -12;
-  link2_aft = 6;
-  link2_wid = 3.5;
-  link1_len = 20;
-  link1_wid = 3.5;
-  marker_size = 46.0375f;//mm;//1.8125;//inches
+  link2_box.resize(4);
 
   TagTestOptions opts = create_options();
   tag_family= new TagFamily(opts.family_str);
   tag_detector=new TagDetector(*tag_family, opts.params);
   opticalCenter = Point2d(0.5*detection_image.rows, 0.5*detection_image.cols);
-  arm_tracker.set_rate(1);
+  arm_tracker.set_rate(0);
 }
 Arm_april::~Arm_april()
 {
@@ -62,9 +57,6 @@ int Arm_april::detect_arm()
       arm_marker = d;
       arm_tracker.attach_marker(arm_marker);
       arm_tracker.filter();
-      link2_front = arm_tracker.interpolate(link2_for, 0);
-      link2_back = arm_tracker.interpolate(link2_aft,0);
-
     }
   }
 }
@@ -81,17 +73,19 @@ int Arm_april::draw_markers(Mat& frame_ref)
 }
 int Arm_april::draw_box(Mat& frame_ref)
 {
-  std::vector<int> v;
   if(detected)
   {
-      rectangle(frame_ref,  link2_back,
-                        link2_front,
-                        Scalar( 0, 255, 255 ),
-                        0,8);
-      rectangle(frame_ref,  arm_marker.interpolate(link2_for, 0),
-                        arm_marker.interpolate(link2_aft,0),
-                        Scalar( 255, 0, 255 ),
-                        0,8);
+    link2_back = arm_tracker.interpolate(link2_aft,0);
+    link2_front = arm_tracker.interpolate(link2_for,0);
+    std::cout << "link front: " <<link2_front<< '\n';
+
+
+    link2_box.at(0) = arm_tracker.interpolate(link2_for, link2_wid);
+    link2_box.at(1) = arm_tracker.interpolate(link2_for, -link2_wid);
+    link2_box.at(2) = arm_tracker.interpolate(link2_aft, -link2_wid);
+    link2_box.at(3) = arm_tracker.interpolate(link2_aft, link2_wid);
+      for (int i = 0; i < 4; i++)
+          line(frame_ref, link2_box.at(i), link2_box.at((i+1)%4), Scalar(0,255,0));
   }
 
 }

@@ -1,3 +1,4 @@
+#include <Python.h>
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -22,9 +23,6 @@ void* get_images(void*)
 }
 
 int main(int argc, char const *argv[]) {
-
-
-
   int width = 640;
   int height = 480;
   int received_frames = 0;
