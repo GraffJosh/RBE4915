@@ -8,6 +8,12 @@
 #include "tracker.h"
 
 #define DEFAULT_TAG_FAMILY "Tag16h5"
+#define link2_for -8
+#define link2_aft 3
+#define link2_wid 1.5
+#define link1_len 20
+#define link1_wid 3.5
+#define marker_size 46.0375f//mm;//1.8125;//inche
 
 
 using namespace std;
@@ -54,16 +60,11 @@ private:
   float rotation_angle;
   bool detected=false;
 
-  float link2_for;
-  float link2_aft;
-  float link2_wid;
-  float link1_len;
-  float link1_wid;
+  std::vector<Point2d> link2_box;
   Point2d link1_front;
   Point2d link2_front;
   Point2d link1_back;
   Point2d link2_back;
-  float marker_size;
 
   Mat rotation_matrix;
   Mat translation_matrix;
