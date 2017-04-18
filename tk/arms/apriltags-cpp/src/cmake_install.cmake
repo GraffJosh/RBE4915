@@ -1,4 +1,4 @@
-# Install script for directory: /home/ubuntu/RBE4915/tk/arms/apriltags-cpp/src
+# Install script for directory: /home/joshgraff/RBE4915/tk/arms/apriltags-cpp/src
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

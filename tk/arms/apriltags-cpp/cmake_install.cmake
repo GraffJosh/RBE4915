@@ -1,4 +1,4 @@
-# Install script for directory: /home/ubuntu/RBE4915/tk/arms/apriltags-cpp
+# Install script for directory: /home/joshgraff/RBE4915/tk/arms/apriltags-cpp
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,7 +34,7 @@ ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/home/ubuntu/RBE4915/tk/arms/apriltags-cpp/src/cmake_install.cmake")
+  INCLUDE("/home/joshgraff/RBE4915/tk/arms/apriltags-cpp/src/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 

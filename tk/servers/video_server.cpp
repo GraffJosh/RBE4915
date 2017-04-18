@@ -42,8 +42,8 @@ int main(int argc, char const *argv[]) {
   pthread_create(&receive_thread, NULL, get_images,NULL);
 
   Arm_april left_arm(11,received_frame);              //tracking and arm management
-  Arm_Control left_control(1,"192.168.10.64",5005);
-  cout<<left_control.send_point(50,400,-400,375)<<'\n';
+  // Arm_Control left_control(1,"192.168.10.64",5005);
+  // cout<<left_control.send_point(50,400,-400,375)<<'\n';
   Mat proc_frame = Mat::zeros(height,width,CV_8UC3);  //unpainted frame for processing
   Mat draw_frame = Mat::zeros(height,width,CV_8UC3);  //painted frame for people
 

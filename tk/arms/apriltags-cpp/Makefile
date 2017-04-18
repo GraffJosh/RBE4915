@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ubuntu/RBE4915/tk
+CMAKE_SOURCE_DIR = /home/joshgraff/RBE4915/tk
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ubuntu/RBE4915/tk
+CMAKE_BINARY_DIR = /home/joshgraff/RBE4915/tk
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -69,14 +69,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/ubuntu/RBE4915/tk && $(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/RBE4915/tk/CMakeFiles /home/ubuntu/RBE4915/tk/arms/apriltags-cpp/CMakeFiles/progress.marks
-	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/RBE4915/tk/CMakeFiles 0
+	cd /home/joshgraff/RBE4915/tk && $(CMAKE_COMMAND) -E cmake_progress_start /home/joshgraff/RBE4915/tk/CMakeFiles /home/joshgraff/RBE4915/tk/arms/apriltags-cpp/CMakeFiles/progress.marks
+	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/joshgraff/RBE4915/tk/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/clean
+	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/clean
 .PHONY : clean
 
 # The main clean target
@@ -85,17 +85,17 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/preinstall
+	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/ubuntu/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/preinstall
+	cd /home/joshgraff/RBE4915/tk && $(MAKE) -f CMakeFiles/Makefile2 arms/apriltags-cpp/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/ubuntu/RBE4915/tk && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/joshgraff/RBE4915/tk && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Help Target
@@ -117,6 +117,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/ubuntu/RBE4915/tk && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/joshgraff/RBE4915/tk && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
