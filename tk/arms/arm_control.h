@@ -31,7 +31,7 @@ class Arm_Control{
     Arm_Control(int arm_num,string ip_addr, int port_num);
     ~Arm_Control();
     bool is_connected();
-
+    int send_transformed(char speed,int x, int y, int z);
     int send_point(char speed,int x,int y,int z);
 
   private:

@@ -77,9 +77,6 @@ int Arm_april::draw_box(Mat& frame_ref)
   {
     link2_back = arm_tracker.interpolate(link2_aft,0);
     link2_front = arm_tracker.interpolate(link2_for,0);
-    std::cout << "link front: " <<link2_front<< '\n';
-
-
     link2_box.at(0) = arm_tracker.interpolate(link2_for, link2_wid);
     link2_box.at(1) = arm_tracker.interpolate(link2_for, -link2_wid);
     link2_box.at(2) = arm_tracker.interpolate(link2_aft, -link2_wid);
@@ -87,5 +84,17 @@ int Arm_april::draw_box(Mat& frame_ref)
       for (int i = 0; i < 4; i++)
           line(frame_ref, link2_box.at(i), link2_box.at((i+1)%4), Scalar(0,255,0));
   }
+}
 
+void Arm_april::print_tags()
+{
+  for(auto & marker: detections)
+  {
+    std::cout << "marker: " <<marker.id<<" pos: "<<marker.cxy<< '\n';
+  }
+}
+
+Point2d Arm_april::get_position()
+{
+  return arm_tracker.interpolate(link2_for,0);
 }

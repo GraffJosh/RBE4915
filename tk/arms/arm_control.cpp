@@ -40,6 +40,11 @@ int Arm_Control::send_point(char speed,int x,int y,int z)
   return send_packet(new_pckt);
 }
 
+int Arm_Control::send_transformed(char speed,int x, int y, int z)
+{
+
+}
+
 int Arm_Control::send_packet(struct packet in_packet)
 {
 

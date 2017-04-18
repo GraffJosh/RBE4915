@@ -54,6 +54,8 @@ public:
   int       detect_arm();
   int       draw_markers(Mat& frame_ref);
   int       draw_box(Mat& frame_ref);
+  void      print_tags();
+  Point2d   get_position();
 
 private:
   int arm_num;

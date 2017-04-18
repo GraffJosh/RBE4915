@@ -9,13 +9,20 @@
 #include <arm_april.h>
 #include <arm_control.h>
 #include "server.h"
+#include "aruco_camera.h"
+#define IMAGE_WIDTH 640
+#define IMAGE_HEIGHT 480
 
 using namespace udp_client_server;
 using namespace cv;
 using namespace std;
 pthread_t receive_thread;
 cv::Mat received_frame;
+Point2d clicked_point;
+bool clicked = false;
 udp_client_server::udp_server* image_server;
+void window_callback(int event, int x, int y, int flags, void* userdata);
+
 void* get_images(void*)
 {
 
@@ -24,29 +31,50 @@ void* get_images(void*)
 }
 
 int main(int argc, char const *argv[]) {
-  int width = 640;
-  int height = 480;
   int received_frames = 0;
   int num_markers = 0;
 
   VideoWriter outputVideo;
-  if(argc>1)
-  {
-    string argument;
+  if(argc>1) { string argument;
     argument.append(argv[argc-1]);
-    outputVideo.open("output"+argument, 0, 10, Size(width,height), true);
-  }
+    outputVideo.open("output"+argument, 0, 10, Size(IMAGE_WIDTH,IMAGE_HEIGHT), true);  }
 
-  received_frame = Mat::zeros(height,width,CV_8UC3);
-  image_server = new udp_client_server::udp_server("192.168.10.5",1234);
+  received_frame = Mat::zeros(IMAGE_HEIGHT,IMAGE_WIDTH,CV_8UC3);
+  image_server = new udp_client_server::udp_server("192.168.10.8",1234);
   pthread_create(&receive_thread, NULL, get_images,NULL);
 
-  Arm_april left_arm(11,received_frame);              //tracking and arm management
-  // Arm_Control left_control(1,"192.168.10.64",5005);
-  // cout<<left_control.send_point(50,400,-400,375)<<'\n';
-  Mat proc_frame = Mat::zeros(height,width,CV_8UC3);  //unpainted frame for processing
-  Mat draw_frame = Mat::zeros(height,width,CV_8UC3);  //painted frame for people
+  Mat proc_frame = Mat::zeros(IMAGE_HEIGHT,IMAGE_WIDTH,CV_8UC3);  //unpainted frame for processing
+  Mat draw_frame = Mat::zeros(IMAGE_HEIGHT,IMAGE_WIDTH,CV_8UC3);  //painted frame for people
+  Arm_april left_arm(11,proc_frame);              //tracking and arm management
+  Arm_Control left_control(1,"192.168.10.64",5005);
 
+  Aruco_Camera input_cam;
+  input_cam.readFromXMLFile("Camera_Calib.yml");
+  input_cam.resize(received_frame.size());
+  input_cam.add_points(Point3f(0,-400,-1931),Point2f(95,290));
+  input_cam.add_points(Point3f(0,-350,-1931),Point2f(108,256));
+  input_cam.add_points(Point3f(0,-300,-1931),Point2f(110,226));
+  input_cam.add_points(Point3f(0,-250,-1931),Point2f(110,197));
+  input_cam.add_points(Point3f(150,-300,-1931),Point2f(195,226));
+  input_cam.add_points(Point3f(200,-300,-1931),Point2f(221,230));
+  input_cam.add_points(Point3f(250,-300,-1931),Point2f(247,235));
+  input_cam.add_points(Point3f(300,-300,-1931),Point2f(277,244));
+  input_cam.add_points(Point3f(350,-300,-1931),Point2f(311,245));
+  input_cam.add_points(Point3f(400,-300,-1931),Point2f(345,230));
+  input_cam.add_points(Point3f(400,-500,-1931),Point2f(348,355));
+  input_cam.add_points(Point3f(300,-500,-1931),Point2f(284,354 ));
+  // {{0,95} ,{0,108} ,{0,110} ,{0,110} ,{150,195} ,{200,221} ,{250,247} ,{300,277} ,{350,311} ,{400,345} ,{400,348} ,{300,284}}  // input_cam.add_points(Point3f(0,-600,-1931),Point2f(209,338 ));
+  // {{-400, 290},{-350, 256},{-300, 226},{-250, 197},{-300, 226},{-300, 230},{-300, 235},{-300, 244},{-300, 245},{-300, 230},{-500, 355},{-500, 354}}// input_cam.add_points(Point3f(200,-600,-1931),Point2f(287,337 ));
+  // input_cam.add_points(Point3f(400,-600,-1931),Point2f(368,339 ));
+  // input_cam.add_points(Point3f(400,0,-1931),Point2f(362,96 ));
+  // input_cam.add_points(Point3f(0,0,-1931),Point2f(204,128 ));
+  input_cam.calibrate();
+
+
+  namedWindow("draw_window", 1);
+  setMouseCallback("draw_window", window_callback, NULL);
+
+  cout<<left_control.send_point(100,200,-300,200)<<'\n';
 
   while (1) {
 
@@ -55,17 +83,16 @@ int main(int argc, char const *argv[]) {
         case 0:
           // cv::imshow("frame",received_frame);
           if (outputVideo.isOpened())
-          {
-            outputVideo <<received_frame;
-          }
+          { outputVideo <<received_frame;}
+          undistort(received_frame,proc_frame, input_cam.CameraMatrix,input_cam.Distorsion);
+          // received_frame.copyTo(proc_frame);
           received_frames++;
           break;
         case 1:
           // cv::imshow("frame",received_frame);
           break;
         case -2:
-          std::cout << "Mutex Error" << '\n';
-          // usleep(100);
+          usleep(100);
           continue;
       }
 
@@ -73,18 +100,50 @@ int main(int argc, char const *argv[]) {
     if(received_frames >0 )
     {
           num_markers = left_arm.detect_arm();
-          received_frame.copyTo(proc_frame);
           proc_frame.copyTo(draw_frame);
           left_arm.draw_markers(draw_frame);
           left_arm.draw_box(draw_frame);
-          cv::imshow("frame",draw_frame);
-
+          cv::imshow("draw_window",draw_frame);
     }
-      // std::cout << "frames received: " << received_frames << '\n';
+
+      if(clicked)
+      {
+        std::cout << "arm position: "<<left_arm.get_position()<<'\n' ;
+
+        std::cout << "clicked_pont: " <<input_cam.transformto_real(left_arm.get_position()) <<'\n';
+        // std::cout << "clicke: " <<clicked_point<< '\n';
+        clicked = false;
+
+      }
       cv::waitKey(1);
       usleep(10000);
 
   }
   delete image_server;
   return 0;
+}
+
+void window_callback(int event, int x, int y, int flags, void* userdata)
+{
+    // x = x - IMAGE_WIDTH/2;
+    // y = y - IMAGE_HEIGHT;
+     if  ( event == EVENT_LBUTTONDOWN )
+     {
+      /*
+      baseLink= [240, 320]
+      endpoint= [341.712, 426.705]
+      */
+      clicked_point = Point2d(x,y);
+      clicked = true;
+          // cout<<left_control.send_point(50,400,-400,375)<<'\n';
+     }
+     else if  ( event == EVENT_RBUTTONDOWN )
+     {
+     }
+     else if  ( event == EVENT_MBUTTONDOWN )
+     {
+     }
+     else if ( event == EVENT_MOUSEMOVE )
+     {
+     }
 }
