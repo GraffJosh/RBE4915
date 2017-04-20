@@ -24,14 +24,20 @@ TagTestOptions create_options(){
   opts.params.adaptiveThresholdRadius += (opts.params.adaptiveThresholdRadius+1) % 2;
   return opts;
 }
-Arm_april::Arm_april(int fid_num, Mat& frame_ref)
+
+Arm_april::Arm_april(int fid_num,Mat& frame_ref, float forward,float back,float width)
 {
+
   detection_image = frame_ref;
-  draw_image = frame_ref;
   arm_num= fid_num;
 
-  link2_box.resize(4);
+  front_len = forward;
+  back_len = back;
+  wid = width;
 
+
+  //allocates space for the box.
+  link2_box.resize(4);
   TagTestOptions opts = create_options();
   tag_family= new TagFamily(opts.family_str);
   tag_detector=new TagDetector(*tag_family, opts.params);
@@ -53,34 +59,40 @@ int Arm_april::detect_arm()
     const TagDetection& d = detections[i];
     if(d.id == arm_num)
     {
-      detected = true;
+      is_detected = true;
       arm_marker = d;
       arm_tracker.attach_marker(arm_marker);
       arm_tracker.filter();
     }
   }
+  return detections.size();
 }
 
 int Arm_april::draw_markers(Mat& frame_ref)
 {
   // cv::Mat img = tag_family.superimposeDetections(frame_ref, detections);
   // frame_ref = tag_family->superimposeDetections(frame_ref, detections);
-  if(detected){
+  if(is_detected){
     frame_ref = tag_family->superimposeDetection(frame_ref, arm_marker);
     // std::cout << "arm: " << arm_marker.cxy <<'\n';
   }
 
 }
+
+bool Arm_april::detected()
+{
+  return is_detected;
+}
 int Arm_april::draw_box(Mat& frame_ref)
 {
-  if(detected)
+  if(is_detected)
   {
-    link2_back = arm_tracker.interpolate(link2_aft,0);
-    link2_front = arm_tracker.interpolate(link2_for,0);
-    link2_box.at(0) = arm_tracker.interpolate(link2_for, link2_wid);
-    link2_box.at(1) = arm_tracker.interpolate(link2_for, -link2_wid);
-    link2_box.at(2) = arm_tracker.interpolate(link2_aft, -link2_wid);
-    link2_box.at(3) = arm_tracker.interpolate(link2_aft, link2_wid);
+    link2_back = arm_tracker.interpolate(back_len,0);
+    link2_front = arm_tracker.interpolate(front_len,0);
+    link2_box.at(0) = arm_tracker.interpolate(front_len, wid);
+    link2_box.at(1) = arm_tracker.interpolate(front_len, -wid);
+    link2_box.at(2) = arm_tracker.interpolate(back_len, -wid);
+    link2_box.at(3) = arm_tracker.interpolate(back_len, wid);
       for (int i = 0; i < 4; i++)
           line(frame_ref, link2_box.at(i), link2_box.at((i+1)%4), Scalar(0,255,0));
   }
@@ -96,5 +108,5 @@ void Arm_april::print_tags()
 
 Point2d Arm_april::get_position()
 {
-  return arm_tracker.interpolate(link2_for,0);
+  return arm_tracker.interpolate(front_len,0);
 }

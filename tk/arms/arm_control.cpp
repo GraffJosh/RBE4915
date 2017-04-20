@@ -42,10 +42,40 @@ int Arm_Control::send_point(char speed,int x,int y,int z)
   return 1;//send_packet(new_pckt);
 }
 
+int Arm_Control::send_point(char speed,Point3d input)
+{
+
+  struct packet new_pckt;
+  struct point6d new_data;
+  new_pckt.status = 4;
+  new_pckt.robot = arm_num;
+  new_pckt.speed = speed;
+  new_pckt.index = 0;
+  new_data.x = input.x;
+  new_data.y = input.y;
+  new_data.z = input.z;
+  new_data.r = 0;
+  new_data.p = 180;
+  new_data.t = 0;
+  new_pckt.data = new_data;
+  curr_position = new_data;
+  auto ret_movement_status = async(launch::async,&Arm_Control::send_packet,this,new_pckt);
+  movement_status = std::move(ret_movement_status);
+  return 1;//send_packet(new_pckt);
+}
+
 int Arm_Control::send_transformed(char speed,int x, int y, int z)
 {
 
 }
+
+bool Arm_Control::is_ready()
+  {
+    if(movement_status.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
+      return true;
+    else
+      return false;
+  }
 
 cv::Point3d Arm_Control::get_position(){
   cv::Point3d ret_point;

@@ -14,6 +14,7 @@
 #define status_buffer_size 20
 
 using namespace std;
+using namespace cv;
 string packet_to_string(struct packet in_packet);
 string point_to_string(struct point6d in_point);
 
@@ -33,8 +34,10 @@ class Arm_Control{
     Arm_Control(int arm_num,string ip_addr, int port_num);
     ~Arm_Control();
     bool is_connected();
+    bool is_ready();
     int send_transformed(char speed,int x, int y, int z);
     int send_point(char speed,int x,int y,int z);
+    int send_point(char speed,Point3d input);
     cv::Point3d get_position();
 
   private:
