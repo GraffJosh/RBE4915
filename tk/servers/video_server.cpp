@@ -51,20 +51,20 @@ int main(int argc, char const *argv[]) {
   Aruco_Camera input_cam;
   input_cam.readFromXMLFile("Camera_Calib.yml");
   input_cam.resize(received_frame.size());
-  input_cam.add_points(Point3f(0,-400,-1931),Point2f(95,290));
-  input_cam.add_points(Point3f(0,-350,-1931),Point2f(108,256));
-  input_cam.add_points(Point3f(0,-300,-1931),Point2f(110,226));
-  input_cam.add_points(Point3f(0,-250,-1931),Point2f(110,197));
-  input_cam.add_points(Point3f(150,-300,-1931),Point2f(195,226));
-  input_cam.add_points(Point3f(200,-300,-1931),Point2f(221,230));
-  input_cam.add_points(Point3f(250,-300,-1931),Point2f(247,235));
-  input_cam.add_points(Point3f(300,-300,-1931),Point2f(277,244));
-  input_cam.add_points(Point3f(350,-300,-1931),Point2f(311,245));
-  input_cam.add_points(Point3f(400,-300,-1931),Point2f(345,230));
-  input_cam.add_points(Point3f(400,-500,-1931),Point2f(348,355));
-  input_cam.add_points(Point3f(300,-500,-1931),Point2f(284,354 ));
-  // {{0,95} ,{0,108} ,{0,110} ,{0,110} ,{150,195} ,{200,221} ,{250,247} ,{300,277} ,{350,311} ,{400,345} ,{400,348} ,{300,284}}  // input_cam.add_points(Point3f(0,-600,-1931),Point2f(209,338 ));
-  // {{-400, 290},{-350, 256},{-300, 226},{-250, 197},{-300, 226},{-300, 230},{-300, 235},{-300, 244},{-300, 245},{-300, 230},{-500, 355},{-500, 354}}// input_cam.add_points(Point3f(200,-600,-1931),Point2f(287,337 ));
+  input_cam.add_points(Point3f(0,-400,-1250),Point2f(95,290));
+  input_cam.add_points(Point3f(0,-350,-1250),Point2f(108,256));
+  input_cam.add_points(Point3f(0,-300,-1250),Point2f(110,226));
+  input_cam.add_points(Point3f(0,-250,-1250),Point2f(110,197));
+  input_cam.add_points(Point3f(150,-300,-1250),Point2f(195,226));
+  input_cam.add_points(Point3f(200,-300,-1250),Point2f(221,230));
+  input_cam.add_points(Point3f(250,-300,-1250),Point2f(247,235));
+  input_cam.add_points(Point3f(300,-300,-1250),Point2f(277,244));
+  input_cam.add_points(Point3f(350,-300,-1250),Point2f(311,245));
+  input_cam.add_points(Point3f(400,-300,-1250),Point2f(345,230));
+  input_cam.add_points(Point3f(400,-500,-1250),Point2f(348,355));
+  input_cam.add_points(Point3f(300,-500,-1250),Point2f(284,354 ));
+  // {{110,0}, {195,150} ,{221,200} ,{247,250} ,{277,300} ,{311,350} ,{345,400}}  // input_cam.add_points(Point3f(0,-600,-1931),Point2f(209,338 ));
+  // {{290,-400 },{256,-350 },{197,-250 },{235,-300 },{355,-500 }}// input_cam.add_points(Point3f(200,-600,-1931),Point2f(287,337 ));
   // input_cam.add_points(Point3f(400,-600,-1931),Point2f(368,339 ));
   // input_cam.add_points(Point3f(400,0,-1931),Point2f(362,96 ));
   // input_cam.add_points(Point3f(0,0,-1931),Point2f(204,128 ));
@@ -74,7 +74,7 @@ int main(int argc, char const *argv[]) {
   namedWindow("draw_window", 1);
   setMouseCallback("draw_window", window_callback, NULL);
 
-  cout<<left_control.send_point(100,200,-300,200)<<'\n';
+  cout<<left_control.send_point(100,500,-300,200)<<'\n';
 
   while (1) {
 
@@ -108,12 +108,13 @@ int main(int argc, char const *argv[]) {
 
       if(clicked)
       {
-        std::cout << "arm position: "<<left_arm.get_position()<<'\n' ;
-
-        std::cout << "clicked_pont: " <<input_cam.transformto_real(left_arm.get_position()) <<'\n';
-        // std::cout << "clicke: " <<clicked_point<< '\n';
+        std::cout << "arm seen: "<<left_arm.get_position()<<'\n' ;
+        std::cout << "arm_actual: " << left_control.get_position()<< '\n';
+        Point3d transformed = input_cam.transformto_real(clicked_point);
+        std::cout << "transformed: " << transformed<<'\n';
+        std::cout << "clicked: " <<clicked_point<< '\n';
         clicked = false;
-
+        left_control.send_point(100,transformed.x,transformed.y,200);
       }
       cv::waitKey(1);
       usleep(10000);

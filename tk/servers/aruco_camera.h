@@ -5,6 +5,7 @@
 #ifndef Aruco_Camera_H
 #define Aruco_Camera_H
 #include <opencv2/core/core.hpp>
+#include <cmath>
 #include <string>
 using namespace std;
 /**\brief Parameters of the camera. I stole this from ARUCO

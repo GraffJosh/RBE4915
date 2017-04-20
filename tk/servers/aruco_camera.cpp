@@ -72,9 +72,9 @@ bool Aruco_Camera::calibrate()
   cv::Rodrigues(Rvec, m33);
 
   cv::Mat m44 = cv::Mat::eye(4, 4, CV_32FC1);
-  for (int i = 0; i < 3; i++)
-      for (int j = 0; j < 3; j++)
-          m44.at< float >(i, j) = m33.at< float >(i, j);
+  // for (int i = 0; i < 3; i++)
+  //     for (int j = 0; j < 3; j++)
+  //         m44.at< float >(i, j) = m33.at< float >(i, j);
 
   std::cout << "m33 " <<m33<< '\n';
   // now, add translation information
@@ -100,18 +100,19 @@ cv::Point3d Aruco_Camera::transformto_real(cv::Point2d image_point)
   //
   // cv::Mat output;//4,1,CV_32FC1);
   //
-  // std::cout << "trans " <<transformation<< '\n';
   // output = input*transformation;
   //
-  // std::cout << "trans " <<transformation<< '\n';
   // std::cout << "input " <<input<< '\n';
+  // std::cout << "trans " <<transformation<< '\n';
   // std::cout << "output " <<output<< '\n';
   // real_point.x = output.at<float>(0,0);
   // real_point.y = output.at<float>(0,1);
   // real_point.z = output.at<float>(0,2);
 
-  real_point.y = 105.781 + 1.6*(image_point.y) - 0.000683122*(image_point.y*image_point.y);
-  real_point.x = 0.00758695*(image_point.x*image_point.x) - 3.31339*image_point.x - 263.376;
+  // real_point.y = image_point.y*-1.5-180;
+  // real_point.x = image_point.x*1+180;
+  real_point.x = -9.99984e-6*pow(image_point.x,3) + 0.00590337*pow(image_point.x,2) + 0.702577*image_point.x - 135.647;
+  real_point.y = 0.0000317646*pow(image_point.y,3) - 0.0257166*pow(image_point.y,2) + 5.15149*image_point.y - 508.691;
   // real_point.y = image_point
   return real_point;
 }

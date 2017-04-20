@@ -36,13 +36,31 @@ int Arm_Control::send_point(char speed,int x,int y,int z)
   new_data.p = 180;
   new_data.t = 0;
   new_pckt.data = new_data;
-
-  return send_packet(new_pckt);
+  curr_position = new_data;
+  auto ret_movement_status = async(launch::async,&Arm_Control::send_packet,this,new_pckt);
+  movement_status = std::move(ret_movement_status);
+  return 1;//send_packet(new_pckt);
 }
 
 int Arm_Control::send_transformed(char speed,int x, int y, int z)
 {
 
+}
+
+cv::Point3d Arm_Control::get_position(){
+  cv::Point3d ret_point;
+  if(movement_status.get())
+  {
+
+    ret_point.x = curr_position.x;
+    ret_point.y = curr_position.y;
+    ret_point.z = curr_position.z;
+  }else{
+      ret_point.x = 000;
+      ret_point.y = 000;
+      ret_point.z = 000;
+  }
+  return ret_point;
 }
 
 int Arm_Control::send_packet(struct packet in_packet)
@@ -79,21 +97,21 @@ int Arm_Control::tcp_connect(string ip_addr, int port_num)
   if(status != 0)
   {
     fprintf(stderr, "Error getaddrinfo\n");
-    exit(1);
+    return -1;// exit(1);
   }
 
   socket_id = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
   if(socket_id < 0)
   {
     fprintf(stderr, "Error socket \n");
-    exit(2);
+    return -2;//exit(2);
   }
 
   status = connect(socket_id, res->ai_addr, res->ai_addrlen);
   if(status < 0)
   {
-    fprintf(stderr, "Error connect \n");
-    exit(3);
+    fprintf(stderr, "Error connecting to robot \n");
+    return -3;//exit(3);
   }
 
 

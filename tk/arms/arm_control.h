@@ -3,11 +3,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <future>
 #include <unistd.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <netdb.h>
 #include <arpa/inet.h>
+#include <opencv2/core/core.hpp>
 
 #define status_buffer_size 20
 
@@ -33,8 +35,11 @@ class Arm_Control{
     bool is_connected();
     int send_transformed(char speed,int x, int y, int z);
     int send_point(char speed,int x,int y,int z);
+    cv::Point3d get_position();
 
   private:
+    std::future<int> movement_status;
+    point6d curr_position;
     char* robot_status;
     bool connected= false;
     int socket_id;
