@@ -48,7 +48,7 @@ int main(int argc, char const *argv[]) {
   Arm_april left_arm(11,proc_frame);              //tracking and arm management
   Arm_Control left_control(1,"192.168.10.64",5005);
 
-  Arm_april human(6,proc_frame,2,-1,1);
+  Human_Tracker human(6,proc_frame,2,-1,1);
 
   Aruco_Camera input_cam;
   input_cam.readFromXMLFile("Camera_Calib.yml");

@@ -12,9 +12,12 @@ find_package(OpenCV REQUIRED)
 add_library(receiver SHARED video_server.cpp server.cpp aruco_camera.cpp)
 target_link_libraries(receiver aruco arm ${OpenCV_LIBS} )
 
+add_library(human SHARED human_tracker.cpp)
+target_link_libraries(human ${OpenCV_LIBS})
+
 add_executable(video_server video_server.cpp)
 
 include_directories(${OpenCV_INCLUDE_DIRS} ../arms)
-add_dependencies(video_server aruco arm receiver)
+add_dependencies(video_server aruco arm receiver human)
 
-target_link_libraries(video_server aruco arm receiver ${OpenCV_LIBS} )
+target_link_libraries(video_server aruco arm receiver human ${OpenCV_LIBS} )
