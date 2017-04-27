@@ -56,6 +56,7 @@ public:
   bool      detected();
   int       draw_markers(Mat& frame_ref);
   int       draw_box(Mat& frame_ref);
+  Rect      get_box();
   void      print_tags();
   Point2d   get_position();
 

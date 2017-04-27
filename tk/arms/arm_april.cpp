@@ -35,7 +35,6 @@ Arm_april::Arm_april(int fid_num,Mat& frame_ref, float forward,float back,float 
   back_len = back;
   wid = width;
 
-
   //allocates space for the box.
   link2_box.resize(4);
   TagTestOptions opts = create_options();
@@ -59,7 +58,8 @@ int Arm_april::detect_arm()
     const TagDetection& d = detections[i];
     if(d.id == arm_num)
     {
-      is_detected = true;
+      is_detected = d.good > .5 ? true:false;
+    //   std::cout << "d.good " <<d.good<<detected()<< '\n';
       arm_marker = d;
       arm_tracker.attach_marker(arm_marker);
       arm_tracker.filter();
@@ -85,7 +85,7 @@ bool Arm_april::detected()
 }
 int Arm_april::draw_box(Mat& frame_ref)
 {
-  if(is_detected)
+  if(detected())
   {
     link2_back = arm_tracker.interpolate(back_len,0);
     link2_front = arm_tracker.interpolate(front_len,0);
@@ -96,6 +96,17 @@ int Arm_april::draw_box(Mat& frame_ref)
       for (int i = 0; i < 4; i++)
           line(frame_ref, link2_box.at(i), link2_box.at((i+1)%4), Scalar(0,255,0));
   }
+}
+
+cv::Rect Arm_april::get_box()
+{
+    if(detected())
+    {
+        return Rect(arm_tracker.interpolate(front_len, wid),arm_tracker.interpolate(back_len, -wid));
+    }else{
+        return Rect(Point2d(0,0),Point2d(100,100));
+    }
+
 }
 
 void Arm_april::print_tags()
