@@ -9,10 +9,16 @@ Human_Tracker::Human_Tracker(Mat& input_frame){
     cvtColor(prev_frame, prev_frame, CV_RGB2GRAY);
     cvtColor(next_frame, next_frame, CV_RGB2GRAY);
 
-	x_start = 10;
-	x_stop = 640;
-	y_start = 200;
-	y_stop = 480;
+	x_start_max = 10;
+	x_stop_max = 640;
+	y_start_max = 200;
+	y_stop_max = 480;
+	x_start = x_start_max;
+	x_stop = x_stop_max;
+	y_start = y_start_max;
+	y_stop = y_stop_max;
+
+	search_box = Rect(Point(10,200),Point(640,480));
 	// cvtColor(input_frame,next_frame,CV_RGB2GRAY);
 	// cvtColor(input_frame,prev_frame,CV_RGB2GRAY);
 	// cvtColor(input_frame,curr_frame,CV_RGB2GRAY);
@@ -45,24 +51,7 @@ Human_Tracker::~Human_Tracker(){
 
 
 }
-int Human_Tracker::set_init_box(Rect input_box)
-{
-		bounding_box = input_box;
-		frame_received = true;
-	// if(tracking_frame.cols>100)
-	// {
-	// 	printf("Starting at %d %d %d %d\n", bounding_box.x, bounding_box.y, bounding_box.width, bounding_box.height);
-	// 	reuseFrameOnce = false;
-	// 	skipProcessingOnce = 0;
-	// 	tld_tracker.selectObject(grey_space_frame, &bounding_box);
-	// 	skipProcessingOnce = 5;
-	// 	reuseFrameOnce = true;
-	//
-	// 	arm_detected = true;
-	// 	return 0;
-	// }
 
-}
 
 int Human_Tracker::detect_arm(Mat & input_frame)
 {
@@ -116,20 +105,26 @@ int Human_Tracker::detect_arm(Mat & input_frame)
 			if(motion.cols>100) imshow("test",motion);
 
 	        number_of_changes = detectMotion(motion, result, result_cropped,
-				x_start, x_stop, y_start, y_stop,
-				max_deviation, bounding_box,color);
+				search_box,bounding_box,occlusion_box,
+				max_deviation , color);
 
 			if(number_of_changes>10)
 			{
-				x_start = bounding_box.tl().x - 50;
-				y_start = bounding_box.tl().y - 50;
-				x_stop = bounding_box.br().x + 50;
-				y_stop = bounding_box.br().y + 50;
+				arm_detected = true;
+				search_box = bounding_box;
+				search_box += Size(50,50);
+				search_box -= Point(25,25);
+				// search_box.tl().x = bounding_box.tl().x - 50;
+				// search_box.tl().x = bounding_box.tl().y - 50;
+				// search_box.tl().x = bounding_box.br().x + 50;
+				// search_box.tl().x = bounding_box.br().y + 50;
+				// if(x_start<x_start_max) x_start =x_start_max;
+				// if(x_stop>x_stop_max) x_stop =x_stop_max;
+				// if(y_start<y_start_max) y_start =y_start_max;
+				// if(y_stop>y_stop_max) y_stop =y_stop_max;
 			}else if(mean(motion)[0] > 10 && mean(motion)[0]<100){
-				x_start = 10;
-				x_stop = 640;
-				y_start = 200;
-				y_stop = 480;
+				search_box = init_box;
+
 			}
 
 
@@ -146,8 +141,8 @@ int Human_Tracker::detect_arm(Mat & input_frame)
 // Check if there is motion in the result matrix
 // count the number of changes and return.
 inline int detectMotion(const Mat & motion, Mat & result, Mat & result_cropped,
-                 int& x_start, int& x_stop, int& y_start, int& y_stop,
-                 int max_deviation,Rect& bounding_box,
+                 Rect & search_box,Rect& bounding_box,Rect& occlusion_box,
+                 int max_deviation,
                  Scalar & color)
 {
     // calculate the standard deviation
@@ -164,22 +159,22 @@ inline int detectMotion(const Mat & motion, Mat & result, Mat & result_cropped,
         int min_x = motion.cols, max_x = 0;
         int min_y = motion.rows, max_y = 0;
         // loop over image and detect changes
-		for(int j = y_start; j < y_stop; j+=2){ // height
-            for(int i = x_start; i < x_stop; i+=2){ // width
+		for(int j = search_box.tl().y; j < search_box.br().y; j+=2){ // height
+            for(int i = search_box.tl().x; i < search_box.br().x; i+=2){ // width
                 // check if at pixel (j,i) intensity is equal to 255
                 // this means that the pixel is different in the sequence
                 // of images (prev_frame, curr_frame, next_frame)
-                if(motion.at<int>(j,i) == 255)
+                if(motion.at<int>(j,i) == 255 && !occlusion_box.contains(Point(j,i)))
                 {
                     number_of_changes++;
                     // if(min_x>i) min_x = i;
 //for detecting person
                     // if(min_y>j)
 					// {
-					// if(min_x>i) min_x = i;
-					// if(max_x<i) max_x = i;
-					// max_y = j;
-					// min_y = j-5;
+					// 	if(min_x>i) min_x = i;
+					// 	if(max_x<i) max_x = i;
+					// 	max_y = j;
+					// 	min_y = j-5;
 					// }
 //for detecting the robot
                     if(max_y<j)
@@ -194,10 +189,10 @@ inline int detectMotion(const Mat & motion, Mat & result, Mat & result_cropped,
         }
         if(number_of_changes){
             //check if not out of bounds
-            if(min_x-10 > 0) min_x -= 10;
-            if(min_y-10 > 0) min_y -= 10;
-            if(max_x+10 < result.cols-1) max_x += 10;
-            if(max_y+10 < result.rows-1) max_y += 10;
+            if(min_x-10 > 0){ min_x -= 10;}else{min_x = 0;}
+            if(min_y-10 > 0){ min_y -= 10;}else{min_y = 0;}
+            if(max_x+10 < result.cols-1){ max_x += 10;}else{max_x = result.cols-1;}
+            if(max_y+10 < result.rows-1){ max_y += 10;}else{max_y = result.rows-1;}
             // draw rectangle round the changed pixel
 
             Point x(min_x,min_y);
@@ -212,14 +207,48 @@ inline int detectMotion(const Mat & motion, Mat & result, Mat & result_cropped,
     }
     return 0;
 }
+int Human_Tracker::set_init_box(Rect input_box)
+{
+		search_box= input_box;
+		init_box = input_box;
+		frame_received = true;
+	// if(tracking_frame.cols>100)
+	// {
+	// 	printf("Starting at %d %d %d %d\n", bounding_box.x, bounding_box.y, bounding_box.width, bounding_box.height);
+	// 	reuseFrameOnce = false;
+	// 	skipProcessingOnce = 0;
+	// 	tld_tracker.selectObject(grey_space_frame, &bounding_box);
+	// 	skipProcessingOnce = 5;
+	// 	reuseFrameOnce = true;
+	//
+	// 	arm_detected = true;
+	// 	return 0;
+	// }
+
+}
 int Human_Tracker::draw_box(Mat &draw_frame)
 {
 	if(detected())
+	{
 		rectangle(draw_frame, bounding_box, Scalar(255,0,0),2,1);
+		rectangle(draw_frame, search_box, Scalar(0,255,0),1,1);
+		rectangle(draw_frame, occlusion_box, Scalar(0,255,255),1,1);
+	}
+}
+int Human_Tracker::get_box(Rect &out_box)
+{
+    if(detected())
+    {
+        out_box = bounding_box;
+    }
+}
+int Human_Tracker::set_robot(Rect & robot_box)
+{
+	occlusion_box = robot_box;
 }
 bool Human_Tracker::detected()
 {
-	return frame_received;//(number_of_changes >= confidence_threshold) ? true : false;
+	return arm_detected;//(number_of_changes >= confidence_threshold) ? true : false;
 }
 
 Point2d Human_Tracker::get_position(){

@@ -8,8 +8,8 @@
 using namespace cv;
 using namespace std;
 inline int detectMotion(const Mat & motion, Mat & result, Mat & result_cropped,
-                 int& x_start, int& x_stop, int& y_start, int& y_stop,
-                 int max_deviation,Rect& bounding_box,
+                 Rect & search_box,Rect& bounding_box,Rect& occlusion_box,
+                 int max_deviation,
                  Scalar & color);
 
 class Human_Tracker
@@ -21,8 +21,9 @@ class Human_Tracker
 		int       	detect_arm(Mat& input_frame);
 		bool      	detected();
 		int			set_init_box(Rect input_box);
-
-		int       	draw_box(Mat &draw_frame);
+        int       	draw_box(Mat &draw_frame);
+        int         get_box(Rect &out_box);
+        int         set_robot(Rect & robot_box);
 		Point2d   	get_position();
 	private:
 		Mat prev_frame;
@@ -36,6 +37,10 @@ class Human_Tracker
 
 		int x_start, x_stop;
 		int y_start, y_stop ;
+        int x_start_max;
+        int x_stop_max;
+        int y_start_max;
+        int y_stop_max;
 		// Mat grey_space_frame;
 		// TLD 			tld_tracker;
 		// tld::Trajectory tld_trajectory;
@@ -48,7 +53,10 @@ class Human_Tracker
 		int		skipProcessingOnce = 0;
 		bool 	reuseFrameOnce = false;
 		bool 	frame_received = false;
+		Rect 	init_box;
 		Rect 	bounding_box;
+		Rect 	search_box;
+        Rect    occlusion_box;
 
 };
 

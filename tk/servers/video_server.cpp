@@ -58,6 +58,7 @@ int main(int argc, char const *argv[]) {
     // arm_box.push_back(70);
     Human_Tracker human(proc_frame);//, arm_box);
 
+    Rect left_robot;
     Aruco_Camera input_cam;
     input_cam.readFromXMLFile("Camera_Calib.yml");
     input_cam.resize(received_frame.size());
@@ -67,7 +68,7 @@ int main(int argc, char const *argv[]) {
     namedWindow("draw_window", 1);
     setMouseCallback("draw_window", window_callback, NULL);
 if(left_control.is_connected())
-    left_control.send_point(100,700,-300,200);
+    // left_control.send_point(100,700,-300,200);
 
   while (1) {
 
@@ -97,17 +98,32 @@ if(left_control.is_connected())
         left_arm.detect_arm();
         left_arm.draw_box(draw_frame);
         num_6_tag.detect_arm();
+        left_robot = left_arm.get_box();
+        human.set_robot(left_robot);
         human.detect_arm(proc_frame);
         human.draw_box(draw_frame);
         cv::imshow("draw_window",draw_frame);
     }
     if(left_arm.detected() && !human.detected())// && left_control.is_ready())
     {
-        human.set_init_box(Rect(Point(0,0),Point(100,100)));
-        // human.set_init_box(num_6_tag.get_box());
+        human.set_init_box(Rect(Point(10,200),Point(640,480)));
       //left_control.send_point(100,input_cam.transformto_real(human.get_position()));
     }
+    if(human.detected())
+    {
+        int send_x = 200;
+        int send_y = human.get_position().y;
 
+        Point3d transformed = input_cam.transformto_real(Point(send_x,send_y));
+
+        // left_control.send_point(25,transformed);
+    }else{
+        // int send_x = 300;
+        // int send_y = 300;
+        //
+        // Point3d transformed = input_cam.transformto_real(Point(send_x,send_y));
+        // left_control.send_point(25,transformed);
+    }
     if(left_control.is_connected() && clicked)
     {
       Point3d transformed = input_cam.transformto_real(clicked_point);

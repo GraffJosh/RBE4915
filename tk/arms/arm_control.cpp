@@ -100,7 +100,7 @@ int Arm_Control::send_packet(struct packet in_packet)
   {
     string message = packet_to_string(in_packet);
     int len =strlen((char *)message.c_str());
-    std::cout << "message: " << message<<'\n';
+    // std::cout << "message: " << message<<'\n';
     if(send(socket_id, (char *)message.c_str(), len, 0) > 0)
     {
       return recv(socket_id, robot_status, status_buffer_size, 0);
