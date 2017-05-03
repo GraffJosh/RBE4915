@@ -1,3 +1,14 @@
+/*
+This file manages the main loop for the vision system. It initializes the objects to
+    control the robot, track the robot, and track motion inside the camera frame.
+
+It also manages retreiving images from the video server object in a separate thread.
+
+The file is also an excellent control mechanism, as it can transform from the camera
+    frame to the robot frame and send commands to that robot.  
+*/
+
+
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -51,50 +62,45 @@ int main(int argc, char const *argv[]) {
 
     Arm_Control left_control(1,"192.168.10.64",5005);
 
-    // std::vector<int> arm_box;
-    // arm_box.push_back(0);
-    // arm_box.push_back(40);
-    // arm_box.push_back(50);
-    // arm_box.push_back(70);
     Human_Tracker human(proc_frame);//, arm_box);
 
     Rect left_robot;
     Aruco_Camera input_cam;
     input_cam.readFromXMLFile("Camera_Calib.yml");
     input_cam.resize(received_frame.size());
-    // input_cam.calibrate();
 
 
     namedWindow("draw_window", 1);
     setMouseCallback("draw_window", window_callback, NULL);
 if(left_control.is_connected())
-    // left_control.send_point(100,700,-300,200);
 
   while (1) {
 
+      //manages the collection of frames from the image server the switch case is
+      //for tracking the mutex of the frame retrieval.
       switch (image_server->read_image(&received_frame))
       {
         case 0:
-          // cv::imshow("frame",received_frame);
+            //new frame.
           if (outputVideo.isOpened())
           { outputVideo <<received_frame;}
           undistort(received_frame,proc_frame, input_cam.CameraMatrix,input_cam.Distorsion);
-          // received_frame.copyTo(proc_frame);
           received_frames++;
           break;
         case 1:
-          // cv::imshow("frame",received_frame);
+            //no new frame.
           break;
         case -2:
+            //mutex failure
           usleep(100);
           continue;
       }
 
 
+      //do detection and processing.
     if(received_frames >0 )
     {
         proc_frame.copyTo(draw_frame);
-
         left_arm.detect_arm();
         left_arm.draw_box(draw_frame);
         num_6_tag.detect_arm();
@@ -109,21 +115,17 @@ if(left_control.is_connected())
         human.set_init_box(Rect(Point(10,200),Point(640,480)));
       //left_control.send_point(100,input_cam.transformto_real(human.get_position()));
     }
-    if(human.detected())
+
+    //follow the person's hand.
+    if(human.detected() && left_control.is_ready())
     {
         int send_x = 200;
         int send_y = human.get_position().y;
-
         Point3d transformed = input_cam.transformto_real(Point(send_x,send_y));
-
-        // left_control.send_point(25,transformed);
     }else{
-        // int send_x = 300;
-        // int send_y = 300;
-        //
-        // Point3d transformed = input_cam.transformto_real(Point(send_x,send_y));
-        // left_control.send_point(25,transformed);
     }
+    //if we're connected to the robot, and somebody has clicked,
+    //send the robot to that point.
     if(left_control.is_connected() && clicked)
     {
       Point3d transformed = input_cam.transformto_real(clicked_point);
@@ -132,13 +134,15 @@ if(left_control.is_connected())
       std::cout << "clicked: " <<clicked_point<< '\n';
     }
     cv::waitKey(1);
-    usleep(100);
+    usleep(10);
 
   }
   delete image_server;
   return 0;
 }
 
+
+//manages cursor input to the image window.
 void window_callback(int event, int x, int y, int flags, void* userdata)
 {
      if  ( event == EVENT_LBUTTONDOWN )

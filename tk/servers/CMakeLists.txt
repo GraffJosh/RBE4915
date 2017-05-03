@@ -6,18 +6,25 @@ project(servers)
 
 SET(CMAKE_MODULE_PATH ${CMAKE_INSTALL_PREFIX}/lib/cmake/ )
 
+#find arm (hint, it's in the parent directory)
 find_library(arm HINTS "..")
+#get Open_CV, that should be installed to the computer.
 find_package(OpenCV REQUIRED)
+#we're going to also compile OpenTLD. The current
+#implementation doesn't actually use this.
 add_subdirectory(OpenTLD)
 find_package(OpenTLD REQUIRED HINTS "OpenTLD/build")
 
 
-
+#we're making a library called receiver. I don't really know why,
+#but there you have it.
 add_library(receiver SHARED video_server.cpp server.cpp aruco_camera.cpp)
 target_link_libraries(receiver aruco arm ${OpenCV_LIBS} )
 
 link_directories(OpenTLD/src/opentld/main)
 include_directories(human ${OpenCV_INCLUDE_DIR} ${OPENTLD_INCLUDE_DIRS})
+#we're making a library for our human tracking code, should probaby have put this in
+#the receiver lib.
 add_library(human SHARED human_tracker.cpp)
 target_link_libraries(human ${OpenCV_LIBS} ${OPENTLD_LIBS})
 

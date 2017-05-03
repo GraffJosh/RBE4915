@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+#this file, and its dependencies manage robot control in a python lib.
+#This was moved to C++ to make calling from video_server more easy.
 
 import socket
 import time

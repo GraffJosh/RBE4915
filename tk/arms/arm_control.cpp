@@ -1,6 +1,14 @@
+/*
+This file manages control of the robot through a TCP client connected to the robot's
+    MV controller.
+
+Primarily used to send points to the controller, it can be constructed in any file.
+
+On the other end, the TCP.Server0 program needs to be running, accepting a string
+    packet shaped appropriately.
+*/
+
 #include "arm_control.h"
-
-
 Arm_Control::Arm_Control(int in_arm_num, string ip_addr, int port_num)
 {
   arm_num = in_arm_num;
@@ -37,6 +45,8 @@ int Arm_Control::send_point(char speed,int x,int y,int z)
   new_data.t = 0;
   new_pckt.data = new_data;
   curr_position = new_data;
+  //this is a really neat call to asynchronously send a point to the robot.
+  //the future produced by it is able to be checked to see if the robot has replied.
   auto ret_movement_status = async(launch::async,&Arm_Control::send_packet,this,new_pckt);
   movement_status = std::move(ret_movement_status);
   return 1;//send_packet(new_pckt);
@@ -161,7 +171,7 @@ int Arm_Control::tcp_connect(string ip_addr, int port_num)
 
 }
 
-
+//these to_strings produce the packets that are sent to the robot.
 string packet_to_string(struct packet in_packet)
 {
   return to_string(in_packet.status)+","+to_string(in_packet.robot)+","+

@@ -7,7 +7,7 @@
 
 using namespace cv;
 using namespace std;
-inline int detectMotion(const Mat & motion, Mat & result, Mat & result_cropped,
+inline int detectMotion(Mat & motion, Mat & result, Mat & result_cropped,
                  Rect & search_box,Rect& bounding_box,Rect& occlusion_box,
                  int max_deviation,
                  Scalar & color);

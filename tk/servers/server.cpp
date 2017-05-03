@@ -33,6 +33,8 @@
  * \param[in] port  The port we receive from.
  */
 
+
+//starts up the server, connects to the IP at the port.
  #include "server.h"
  using namespace udp_client_server;
  using namespace std;
@@ -143,6 +145,8 @@ int udp_server::recv(char *msg, size_t max_size)
 }
 
 //PERMANENT LOOP, CALL ASYNCH
+//this retrieves images from the sender, and copies it into the received buffer.
+//the write and read from that buffer are protected through mutexes.
 int udp_server::receive_image(int& width, int& height)
 {
     received_image = cv::Mat::zeros(height,width,CV_8UC3);
@@ -166,6 +170,7 @@ int udp_server::receive_image(int& width, int& height)
             image_size+=bytes;
             if(image_size==(int)max_size)
             {
+                //reshapes the received data into a buffer.
               cv::Mat image_buffer(width, height, CV_8UC3, sockData);
               copy_mutex.lock();
               image_buffer.copyTo(received_image);

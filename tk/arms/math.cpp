@@ -1,3 +1,7 @@
+/*
+Basic math stuff for use in other programs.
+*/
+
 #ifndef jpg_math_h
 #define jpg_math_h val
 #include <opencv2/core/core.hpp>

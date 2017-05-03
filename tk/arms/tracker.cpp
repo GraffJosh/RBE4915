@@ -1,4 +1,10 @@
+/*
+This file manages the tracking of the robot, including filtering of the robot's pose.
 
+I believe that Arm_April constructs this object to filter/track the marker.
+    in the future, it might be applied also to do more interested tracking mechanisms on
+    humans and such.
+*/
 #include "tracker.h"
 
 Tracker::Tracker(TagDetection* in_marker, float in_filter_rate)

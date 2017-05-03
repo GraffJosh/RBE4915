@@ -1,3 +1,8 @@
+/*
+manages apriltag tracking for the robot_arm. handles acquisition and distribtuin
+    of the position/occlusion of the robot. 
+*/
+
 #include "arm_april.h"
 
 TagTestOptions create_options(){

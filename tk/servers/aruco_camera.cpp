@@ -1,3 +1,8 @@
+/*
+This file is... interesting. It mostly handles transformation between real and camera
+the rest is stuff for the undistortion stuff.
+*/
+
 /*****************************
 Copyright 2011 Rafael Muñoz Salinas. All rights reserved.
 
@@ -92,54 +97,13 @@ cv::Point2d Aruco_Camera::transformto_image(cv::Point3d real_point)
 cv::Point3d Aruco_Camera::transformto_real(cv::Point2d image_point)
 {
   cv::Point3d real_point;
-  // add_points(Point3f(0,-400,-1250),Point2f(95,290));
-  // add_points(Point3f(0,-350,-1250),Point2f(108,256));
-  // add_points(Point3f(0,-300,-1250),Point2f(110,226));
-  // add_points(Point3f(0,-250,-1250),Point2f(110,197));
-  // add_points(Point3f(150,-300,-1250),Point2f(195,226));
-  // add_points(Point3f(200,-300,-1250),Point2f(221,230));
-  // add_points(Point3f(250,-300,-1250),Point2f(247,235));
-  // add_points(Point3f(300,-300,-1250),Point2f(277,244));
-  // add_points(Point3f(350,-300,-1250),Point2f(311,245));
-  // add_points(Point3f(400,-300,-1250),Point2f(345,230));
-  // add_points(Point3f(400,-500,-1250),Point2f(348,355));
-  // add_points(Point3f(300,-500,-1250),Point2f(284,354 ));
-  // X {{110,0}, {195,150} ,{221,200} ,{247,250} ,{277,300} ,{311,350} ,{345,400},{344,400},{414,500},{484,600},{547,700}}
-  // Y {{290,-400 },{256,-350 },{197,-250 },{235,-300 },{355,-500 },{412,-600},{445,-700},{519,-780}}
-  // add_points(Point3f(200,-600,-1931),Point2f(287,337 ));
-  // add_points(Point3f(0,-600,-1931),Point2f(209,338 ));
-  // add_points(Point3f(400,-600,-1931),Point2f(368,339 ));
-  // add_points(Point3f(400,0,-1931),Point2f(362,96 ));
-  // add_points(Point3f(0,0,-1931),Point2f(204,128 ));
 
-  // cv::Mat input(1,4,CV_32FC1);
-  // input.at<float>(0,0) = image_point.x;
-  // input.at<float>(0,1) = image_point.y;
-  // input.at<float>(0,2) = -1250;
-  // input.at<float>(0,3) = 1;
-  //
-  // cv::Mat output;//4,1,CV_32FC1);
-  //
-  // output = input*transformation;
-  //
-  // std::cout << "input " <<input<< '\n';
-  // std::cout << "trans " <<transformation<< '\n';
-  // std::cout << "output " <<output<< '\n';
-  // real_point.x = output.at<float>(0,0);
-  // real_point.y = output.at<float>(0,1);
-  // real_point.z = output.at<float>(0,2);
-
-  // real_point.y = image_point.y*-1.5-180;
-  // real_point.x = image_point.x*1+180;
-//version 2:7.75698×10^-6 x^3 - 0.00837491 x^2 + 1.16028 x - 215.989
+//this is the cubic fit to transform from pixels to meters.
+//I couldn't figure out matricies, so I just took data points and did a cubefit
   real_point.x = 1.77361e-6*pow(image_point.x,3) - 0.00232758*pow(image_point.x,2) + 2.47317*image_point.x - 249.022;
   real_point.y = 7.75698e-6*pow(image_point.y,3) - 0.00837491*pow(image_point.y,2) + 1.16028*image_point.y - 215.989;
   real_point.z = 250;
 
-//version 1:
-  // real_point.x = -9.99984e-6*pow(image_point.x,3) + 0.00590337*pow(image_point.x,2) + 0.702577*image_point.x - 135.647;
-  // real_point.y = 0.0000317646*pow(image_point.y,3) - 0.0257166*pow(image_point.y,2) + 5.15149*image_point.y - 508.691;
-  // real_point.y = image_point
   return real_point;
 }
 
