@@ -16,7 +16,7 @@ The file is also an excellent control mechanism, as it can transform from the ca
 #include <future>
 #include <iostream>
 #include <pthread.h>
-#include <arm_aruco.h>
+//#include <arm_aruco.h>
 #include <arm_april.h>
 #include <arm_control.h>
 #include "human_tracker.h"

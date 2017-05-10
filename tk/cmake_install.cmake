@@ -1,4 +1,4 @@
-# Install script for directory: /home/joshgraff/RBE4915/tk
+# Install script for directory: /home/whrl/Downloads/jpg/RBE4915/tk
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -12,7 +12,7 @@ IF(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     STRING(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   ELSE(BUILD_TYPE)
-    SET(CMAKE_INSTALL_CONFIG_NAME "Release")
+    SET(CMAKE_INSTALL_CONFIG_NAME "")
   ENDIF(BUILD_TYPE)
   MESSAGE(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 ENDIF(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
@@ -34,8 +34,8 @@ ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/home/joshgraff/RBE4915/tk/arms/cmake_install.cmake")
-  INCLUDE("/home/joshgraff/RBE4915/tk/servers/cmake_install.cmake")
+  INCLUDE("/home/whrl/Downloads/jpg/RBE4915/tk/arms/cmake_install.cmake")
+  INCLUDE("/home/whrl/Downloads/jpg/RBE4915/tk/servers/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 
@@ -45,7 +45,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "/home/joshgraff/RBE4915/tk/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "/home/whrl/Downloads/jpg/RBE4915/tk/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "/home/joshgraff/RBE4915/tk/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "/home/whrl/Downloads/jpg/RBE4915/tk/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)
